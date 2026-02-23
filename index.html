@@ -209,11 +209,11 @@
     .selector-cta .sel-btn:active { opacity:0.85; }
     .selector-cta .sel-btn:disabled { background:var(--color-bg-neutral); color:var(--color-text-disable); cursor:default; }
 
-    .pipe-arrow { position:absolute; top:50%; transform:translateY(-50%); z-index:2; width:28px; height:28px; border:none; background:rgba(255,255,255,0.85); cursor:pointer; display:flex; align-items:center; justify-content:center; color:var(--color-text-subtle); font-size:18px; padding:0; border-radius:50%; }
+    .pipe-arrow { position:absolute; top:0; bottom:0; z-index:2; width:44px; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; color:var(--color-text-subtle); font-size:18px; padding:0; }
     .pipe-arrow:hover { color:var(--color-text-main); }
     .pipe-arrow.hidden { display:none; }
-    #l2Left { left:-2px; }
-    #l2Right { right:-2px; }
+    #l2Left { left:0; background:linear-gradient(to right, #fff 40%, transparent); }
+    #l2Right { right:0; background:linear-gradient(to left, #fff 40%, transparent); }
 
     /* Reviews */
     .reviews { padding:24px 16px; }

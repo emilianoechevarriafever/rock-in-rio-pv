@@ -532,6 +532,12 @@ function renderCards(){
         '<div class="card-btns">'+btnsHtml+'</div>'+
       '</div>';
 
+    function scrollToPipe(){
+      var headerH = document.querySelector('.sticky-header').offsetHeight || 0;
+      var y = pipeL1.getBoundingClientRect().top + window.pageYOffset - headerH - 8;
+      window.scrollTo({top:Math.max(0,y), behavior:'smooth'});
+    }
+
     card.querySelectorAll('.card-btn-price[data-switch-l1]').forEach(function(btn){
       btn.addEventListener('click', function(e){
         e.stopPropagation();
@@ -547,6 +553,7 @@ function renderCards(){
         renderCards();
         scrollCardIntoView(t.id);
         updateCTA();
+        scrollToPipe();
       });
     });
 
@@ -561,6 +568,7 @@ function renderCards(){
       renderSessions();
       renderCards();
       updateCTA();
+      scrollToPipe();
     });
     cardsScroll.appendChild(card);
   });

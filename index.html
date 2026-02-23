@@ -115,10 +115,10 @@
     .pipe-row { display:flex; gap:12px; align-items:center; justify-content:flex-start; margin-bottom:16px; overflow-x:auto; scrollbar-width:none; padding:0 2px; }
     .pipe-row::-webkit-scrollbar { display:none; }
     .pipe-row.pipe-l1 { gap:12px; }
-    .pipe-row.pipe-l1 .pipe-pill { flex:1; text-align:center; padding:12px 12px; border-radius:4px; font-size:14px; font-weight:400; line-height:20px; border-width:1px; border-color:#ccd2d8; color:#031419; background:#fff; overflow:hidden; min-height:56px; display:flex; align-items:center; justify-content:center; white-space:normal; }
+    .pipe-row.pipe-l1 .pipe-pill { flex:1; text-align:center; padding:6px 12px; border-radius:4px; font-size:14px; font-weight:400; line-height:20px; border-width:1px; border-color:#ccd2d8; color:#031419; background:#fff; overflow:hidden; height:56px; display:flex; align-items:center; justify-content:center; white-space:normal; }
     .pipe-row.pipe-l1 .pipe-pill.active { border-color:var(--color-primary); color:var(--color-primary); background:#fff; }
     .pipe-separator { height:1px; background:var(--color-border); margin-bottom:16px; }
-    .pipe-pill { position:relative; flex-shrink:0; padding:6px 12px; border:1px solid #ccd2d8; border-radius:4px; font-size:14px; font-weight:400; line-height:20px; color:#031419; background:#fff; cursor:pointer; white-space:nowrap; transition:all 0.15s; overflow:hidden; }
+    .pipe-pill { position:relative; flex:1; padding:6px 12px; border:1px solid #ccd2d8; border-radius:4px; font-size:14px; font-weight:400; line-height:20px; color:#031419; background:#fff; cursor:pointer; white-space:nowrap; transition:all 0.15s; overflow:hidden; text-align:center; display:flex; align-items:center; justify-content:center; }
     .pipe-pill.active { border-color:var(--color-primary); color:var(--color-primary); background:#fff; }
     .pipe-pill:active { transform:scale(0.96); }
     .pipe-pill .pill-check { position:absolute; top:0; right:0; width:22px; height:22px; display:none; pointer-events:none; overflow:hidden; }
@@ -127,6 +127,8 @@
     .pipe-pill.active .pill-check { display:block; }
     .pipe-nav { display:flex; align-items:center; gap:0; margin-bottom:16px; }
     .pipe-nav .pipe-row { flex:1; margin-bottom:0; }
+    .pipe-nav .pipe-row.single-pill { justify-content:center; }
+    .pipe-nav .pipe-row.single-pill .pipe-pill { flex:none; min-width:calc(50% - 6px); }
 
     /* Ticket rows — Polar Sounds ticket silhouette with center perforation */
     .ticket-row { --ticket-border:var(--color-border); display:flex; align-items:stretch; min-height:92px; margin-bottom:16px; position:relative; border-radius:8px; overflow:visible; background:transparent; }
@@ -351,6 +353,7 @@
       <div class="pipe-row" id="pipeL2" style="flex:1"></div>
       <button class="pipe-arrow" id="l2Right">&rsaquo;</button>
     </div>
+    <div class="pipe-separator"></div>
 
     <div id="sessionsPanel"></div>
     <div id="selectorCta" class="selector-cta"></div>
@@ -689,6 +692,7 @@ var l2ScrollIdx = 0;
 function renderPipeL2(){
   pipeL2.innerHTML = '';
   if(currentL1 === 'weekend'){
+    pipeL2.classList.add('single-pill');
     var pill = document.createElement('div');
     pill.className = 'pipe-pill active';
     pill.innerHTML = 'Passe' + checkSvg;
@@ -696,6 +700,7 @@ function renderPipeL2(){
     l2Left.classList.add('hidden');
     l2Right.classList.add('hidden');
   } else {
+    pipeL2.classList.remove('single-pill');
     var tierIdx = TIERS.findIndex(function(t){ return t.id === currentTier; });
     l2ScrollIdx = Math.max(0, tierIdx - 1);
     TIERS.forEach(function(t){

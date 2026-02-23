@@ -773,7 +773,7 @@ obs.observe(ticketSection);
 
 stickyBtn.addEventListener('click', function(){
   if(stickyMode === 'tickets'){
-    var y = cardsSection.getBoundingClientRect().top + window.pageYOffset - (document.querySelector('.sticky-header').offsetHeight || 0);
+    var y = ticketSection.getBoundingClientRect().top + window.pageYOffset - (document.querySelector('.sticky-header').offsetHeight || 0);
     window.scrollTo({top:Math.max(0, y), behavior:'smooth'});
     if(getTotal() > 0){ stickyMode = 'getit'; updateCTA(); }
   } else {

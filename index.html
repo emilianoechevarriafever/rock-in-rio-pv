@@ -112,13 +112,18 @@
     .ticket-selector { padding:0 16px 16px; }
 
     /* Explode Pipe */
-    .pipe-row { display:flex; gap:8px; align-items:center; justify-content:flex-start; margin-bottom:12px; overflow-x:auto; scrollbar-width:none; padding:0 2px; }
+    .pipe-row { display:flex; gap:12px; align-items:center; justify-content:flex-start; margin-bottom:16px; overflow-x:auto; scrollbar-width:none; padding:0 2px; }
     .pipe-row::-webkit-scrollbar { display:none; }
-    .pipe-pill { flex-shrink:0; padding:8px 14px; border:1px solid var(--color-border); border-radius:8px; font-size:13px; font-weight:600; color:var(--color-text); background:white; cursor:pointer; white-space:nowrap; transition:all 0.15s; }
+    .pipe-row.pipe-l1 { gap:12px; }
+    .pipe-row.pipe-l1 .pipe-pill { flex:1; text-align:center; }
+    .pipe-separator { height:1px; background:var(--color-border); margin-bottom:16px; }
+    .pipe-pill { position:relative; flex-shrink:0; padding:14px 20px; border:1.5px solid var(--color-border); border-radius:10px; font-size:14px; font-weight:600; color:var(--color-text); background:white; cursor:pointer; white-space:nowrap; transition:all 0.15s; }
     .pipe-pill.active { border-color:var(--color-primary); color:var(--color-primary); background:var(--color-primary-weak); }
     .pipe-pill:active { transform:scale(0.96); }
-    .pipe-label { font-size:11px; font-weight:600; color:var(--color-text-subtle); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:6px; }
-    .pipe-nav { display:flex; align-items:center; gap:0; margin-bottom:12px; }
+    .pipe-pill .pill-check { position:absolute; top:-1px; right:-1px; width:20px; height:20px; background:var(--color-primary); border-radius:0 9px 0 6px; display:none; align-items:center; justify-content:center; }
+    .pipe-pill .pill-check svg { width:10px; height:10px; fill:none; stroke:#fff; stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; }
+    .pipe-pill.active .pill-check { display:flex; }
+    .pipe-nav { display:flex; align-items:center; gap:0; margin-bottom:16px; }
     .pipe-nav .pipe-row { flex:1; margin-bottom:0; }
 
     /* Ticket rows — Polar Sounds ticket silhouette with center perforation */
@@ -334,7 +339,8 @@
       <div class="cards-scroll" id="cardsScroll"></div>
     </div>
 
-    <div class="pipe-row" id="pipeL1"></div>
+    <div class="pipe-row pipe-l1" id="pipeL1"></div>
+    <div class="pipe-separator"></div>
 
     <div class="pipe-nav" id="pipeL2Nav">
       <button class="pipe-arrow" id="l2Left">&lsaquo;</button>
@@ -548,6 +554,8 @@ function scrollCardIntoView(tierId){
   cardsScroll.scrollTo({left:Math.max(0,left), behavior:'smooth'});
 }
 
+var checkSvg = '<span class="pill-check"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></span>';
+
 /* ═══════════════════════════
    RENDER PIPE L1
    ═══════════════════════════ */
@@ -556,7 +564,7 @@ function renderPipeL1(){
   [{id:'day',label:'Day Ticket'},{id:'weekend',label:'Weekend Pass'}].forEach(function(item){
     var pill = document.createElement('div');
     pill.className = 'pipe-pill' + (item.id === currentL1 ? ' active' : '');
-    pill.textContent = item.label;
+    pill.innerHTML = item.label + checkSvg;
     pill.addEventListener('click', function(){
       if(currentL1 === item.id) return;
       currentL1 = item.id;
@@ -582,7 +590,7 @@ function renderPipeL2(){
   if(currentL1 === 'weekend'){
     var pill = document.createElement('div');
     pill.className = 'pipe-pill active';
-    pill.textContent = 'Pass';
+    pill.innerHTML = 'Pass' + checkSvg;
     pipeL2.appendChild(pill);
     l2Left.classList.add('hidden');
     l2Right.classList.add('hidden');
@@ -592,7 +600,7 @@ function renderPipeL2(){
     TIERS.forEach(function(t){
       var pill = document.createElement('div');
       pill.className = 'pipe-pill' + (t.id === currentTier ? ' active' : '');
-      pill.textContent = t.name;
+      pill.innerHTML = t.name + checkSvg;
       pill.addEventListener('click', function(){
         currentTier = t.id;
         renderCards();

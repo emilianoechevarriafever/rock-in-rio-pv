@@ -107,7 +107,7 @@
     .ticket-card .card-btn-price { display:block; width:100%; padding:8px 0; border:1px solid var(--color-border); border-radius:64px; font-family:var(--font); font-size:13px; font-weight:600; text-align:center; background:#fff; color:var(--color-text-main); cursor:pointer; pointer-events:none; }
     .ticket-card .card-btn-selected { display:block; width:100%; padding:8px 0; border:none; border-radius:64px; font-family:var(--font); font-size:13px; font-weight:600; text-align:center; background:var(--color-text-main); color:#fff; cursor:pointer; }
     .ticket-card:not(.active) .card-btn-selected { display:none; }
-    .ticket-card.active .card-btn-price { background:var(--color-primary); color:#fff; border-color:var(--color-primary); }
+    .ticket-card.active .card-btn-highlight { background:var(--color-primary); color:#fff; border-color:var(--color-primary); }
 
     /* Ticket selector */
     .ticket-selector { padding:0 16px 16px; }
@@ -490,24 +490,26 @@ var l2Right = document.getElementById('l2Right');
    ═══════════════════════════ */
 function renderCards(){
   cardsScroll.innerHTML = '';
-  var tiers = currentL1 === 'weekend' ? TIERS.filter(function(t){ return t.weekendPrice !== null; }) : TIERS;
-  tiers.forEach(function(t){
-    var price = currentL1 === 'weekend' ? t.weekendPrice : t.dayPrice;
+  TIERS.forEach(function(t){
     var card = document.createElement('div');
     card.className = 'ticket-card' + (t.id === currentTier ? ' active' : '');
     card.setAttribute('data-tier', t.id);
     var badgeHtml = '';
     if(t.badge) badgeHtml = '<div class="card-badge '+t.badge.cls+'">'+t.badge.text+'</div>';
-    var priceLabel = currentL1 === 'weekend' ? 'Weekend pass' : 'Day ticket';
+
+    var btnsHtml = '';
+    if(t.weekendPrice !== null){
+      btnsHtml += '<div class="card-btn-price'+(currentL1==='weekend'?' card-btn-highlight':'')+'">Weekend pass &ndash; &euro; '+t.weekendPrice.toFixed(2)+'</div>';
+    }
+    btnsHtml += '<div class="card-btn-price'+(currentL1==='day'?' card-btn-highlight':'')+'">Day ticket &ndash; &euro; '+t.dayPrice.toFixed(2)+'</div>';
+    btnsHtml += '<div class="card-btn-selected">Selected</div>';
+
     card.innerHTML =
       '<div class="card-img-wrap"><img class="card-img" src="'+t.img+'" alt="'+t.name+'" loading="lazy">'+badgeHtml+'</div>'+
       '<div class="card-body">'+
         '<div class="card-title">'+t.name+'</div>'+
         '<ul class="card-features">'+t.features.map(function(f){ return '<li>'+f+'</li>'; }).join('')+'</ul>'+
-        '<div class="card-btns">'+
-          '<div class="card-btn-price">'+priceLabel+' &ndash; &euro; '+price.toFixed(2)+'</div>'+
-          '<div class="card-btn-selected">Selected</div>'+
-        '</div>'+
+        '<div class="card-btns">'+btnsHtml+'</div>'+
       '</div>';
     card.addEventListener('click', function(){
       currentTier = t.id;

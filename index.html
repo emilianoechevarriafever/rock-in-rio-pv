@@ -483,41 +483,59 @@ function initQtys(){
 
 /* ═══════════════════════════
    URL QUERY PARAMS SYNC
+   Replica exacta de los session_id de Fever
    ═══════════════════════════ */
+var SESSION_ID_MAP = {
+  'lawn_day':     '227757762',
+  'lawn_weekend': '227757761',
+  'comfort_day':  '227912495',
+  'vip_day':      '227812415',
+  'premium_day':  '308087537'
+};
+
+var SESSION_ID_REVERSE = {};
+Object.keys(SESSION_ID_MAP).forEach(function(k){
+  SESSION_ID_REVERSE[SESSION_ID_MAP[k]] = k;
+});
+
+function getSessionIdFromState(){
+  var key = currentTier + '_' + currentL1;
+  return SESSION_ID_MAP[key] || SESSION_ID_MAP['lawn_day'];
+}
+
 function syncUrlFromState(){
-  var params = new URLSearchParams();
-  params.set('type', currentL1);
-  params.set('tier', currentTier);
-  var sessions = currentL1 === 'weekend' ? WEEKEND_SESSIONS : DAY_SESSIONS;
-  sessions.forEach(function(s){ params.set(s.id, sessionQtys[s.id] || 0); });
+  var sid = getSessionIdFromState();
+  var params = new URLSearchParams(window.location.search);
+  if(params.get('session_id') === sid) return;
+  params.set('session_id', sid);
   var newUrl = window.location.pathname + '?' + params.toString();
-  if(window.location.search !== '?' + params.toString()){
-    history.pushState({l1:currentL1, tier:currentTier, qtys:Object.assign({},sessionQtys)}, '', newUrl);
-  }
+  history.pushState({session_id:sid}, '', newUrl);
 }
 
 function readStateFromUrl(){
   var params = new URLSearchParams(window.location.search);
-  if(!params.has('type') && !params.has('tier')) return false;
-  var l1 = params.get('type');
-  if(l1 === 'day' || l1 === 'weekend') currentL1 = l1;
-  var tier = params.get('tier');
+  var sid = params.get('session_id');
+  if(!sid) return false;
+  var mapping = SESSION_ID_REVERSE[sid];
+  if(!mapping) return false;
+  var parts = mapping.split('_');
+  var tier = parts[0];
+  var l1 = parts[1];
   if(TIERS.some(function(t){ return t.id === tier; })) currentTier = tier;
-  if(currentL1 === 'weekend' && currentTier !== 'lawn') currentTier = 'lawn';
+  if(l1 === 'day' || l1 === 'weekend') currentL1 = l1;
   initQtys();
-  var sessions = currentL1 === 'weekend' ? WEEKEND_SESSIONS : DAY_SESSIONS;
-  sessions.forEach(function(s){
-    var v = parseInt(params.get(s.id), 10);
-    if(!isNaN(v) && v >= 0 && v <= 10) sessionQtys[s.id] = v;
-  });
   return true;
 }
 
 window.addEventListener('popstate', function(e){
-  if(e.state && e.state.l1){
-    currentL1 = e.state.l1;
-    currentTier = e.state.tier;
-    sessionQtys = e.state.qtys || {};
+  if(e.state && e.state.session_id){
+    var mapping = SESSION_ID_REVERSE[e.state.session_id];
+    if(mapping){
+      var parts = mapping.split('_');
+      currentTier = parts[0];
+      currentL1 = parts[1];
+      initQtys();
+    }
   } else {
     readStateFromUrl();
   }
@@ -761,7 +779,6 @@ function renderSessions(){
       sessionQtys[sid] = Math.max(0, Math.min(10, (sessionQtys[sid]||0) + delta));
       renderSessions();
       updateCTA();
-      syncUrlFromState();
     });
   });
 }
@@ -813,12 +830,10 @@ renderPipeL2();
 renderSessions();
 
 (function(){
-  var params = new URLSearchParams();
-  params.set('type', currentL1);
-  params.set('tier', currentTier);
-  var sessions = currentL1 === 'weekend' ? WEEKEND_SESSIONS : DAY_SESSIONS;
-  sessions.forEach(function(s){ params.set(s.id, sessionQtys[s.id] || 0); });
-  history.replaceState({l1:currentL1, tier:currentTier, qtys:Object.assign({},sessionQtys)}, '', window.location.pathname + '?' + params.toString());
+  var sid = getSessionIdFromState();
+  var params = new URLSearchParams(window.location.search);
+  params.set('session_id', sid);
+  history.replaceState({session_id:sid}, '', window.location.pathname + '?' + params.toString());
 })();
 
 hasSeen = false;

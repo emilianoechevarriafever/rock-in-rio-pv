@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rock in Rio Lisboa 2026 — Tickets | Fever</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    :root {
+      --color-primary: #0079ca;
+      --color-primary-weak: #e6f4ff;
+      --color-primary-light: #f2fbfd;
+      --color-primary-hover: #0068b0;
+      --color-text: #031419;
+      --color-text-main: #031419;
+      --color-text-subtle: #536b75;
+      --color-text-disable: #a7b2ba;
+      --color-border: #ccd2d8;
+      --color-border-light: #dde1e4;
+      --color-accent: #6f41d7;
+      --color-accent-weak: #f0ebfd;
+      --color-danger: #eb0052;
+      --color-success: #24a865;
+      --color-success-weak: #e6f9ee;
+      --color-warning: #ff8c00;
+      --color-rating: #f5a623;
+      --color-urgency-bg: #f5e6dc;
+      --color-urgency-text: #9f5800;
+      --color-bg: #ffffff;
+      --color-bg-dark: #06232c;
+      --color-bg-neutral: #f2f3f3;
+      --elevation-01: 0 1px 3px 0 rgba(0,0,0,0.08);
+      --elevation-02: 0 2px 4px rgba(0,0,0,0.12);
+      --focus-ring-primary: 0 0 0 4px rgba(0,121,202,0.32);
+      --shadow-primary: 0 3px 3px rgba(0,121,202,0.15);
+      --font: 'Montserrat', sans-serif;
+    }
+    html { scroll-behavior:smooth; -webkit-tap-highlight-color:transparent; }
+    body { font-family:var(--font); background:var(--color-bg-neutral); color:var(--color-text); overflow-x:hidden; }
+    .phone { width:393px; max-width:100vw; background:var(--color-bg); min-height:100vh; position:relative; padding-bottom:90px; margin:0 auto; }
+
+    .sticky-header { position:-webkit-sticky; position:sticky; top:0; z-index:100; background:#fff; }
+    .navbar { display:flex; align-items:center; justify-content:space-between; padding:10px 16px; background:#fff; border-bottom:1px solid var(--color-border); }
+    .navbar .logo-link { text-decoration:none; display:flex; align-items:center; }
+    .navbar .logo-link svg { height:20px; width:auto; }
+    .nav-icons { display:flex; align-items:center; gap:20px; }
+    .nav-icon-btn { all:unset; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; width:24px; height:24px; }
+    .nav-icon-btn svg { height:24px; width:auto; color:var(--color-text); }
+    .nav-icon-btn:active { opacity:0.6; }
+
+    .hero { position:relative; width:100%; height:390px; overflow:hidden; }
+    .hero .carousel-track { display:flex; height:100%; transition:transform 0.5s cubic-bezier(0.4,0,0.2,1); }
+    .hero .carousel-slide { min-width:100%; height:100%; }
+    .hero .carousel-slide img { width:100%; height:100%; object-fit:cover; display:block; }
+    .hero .nav-prev,.hero .nav-next { position:absolute; top:0; bottom:60px; z-index:3; cursor:pointer; background:none; border:none; padding:0; }
+    .hero .nav-prev { left:0; width:40%; }
+    .hero .nav-next { right:0; width:60%; }
+    .hero .side-buttons { position:absolute; top:16px; right:16px; display:flex; flex-direction:column; gap:12px; z-index:4; }
+    .hero .side-btn { width:40px; height:40px; background:white; border:1px solid rgba(0,0,0,0.1); border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:var(--elevation-02); cursor:pointer; }
+    .hero .side-btn svg { width:20px; height:20px; color:var(--color-text); }
+    .hero .side-btn.liked svg { fill:var(--color-danger); stroke:var(--color-danger); color:var(--color-danger); }
+    .hero .shadow-overlay { position:absolute; bottom:0; left:0; right:0; height:80px; background:linear-gradient(transparent,rgba(0,0,0,0.35)); display:flex; flex-direction:column; justify-content:flex-end; padding:0 16px 16px; z-index:4; pointer-events:none; }
+    .hero .slide-indicators { display:flex; gap:4px; width:100%; }
+    .hero .slide-indicators .bar { flex:1; height:3px; border-radius:64px; background:rgba(255,255,255,0.45); overflow:hidden; position:relative; }
+    .hero .slide-indicators .bar .fill { position:absolute; inset:0; width:0; background:rgba(255,255,255,0.92); border-radius:64px; }
+    .hero .slide-indicators .bar.done .fill { width:100%; }
+    .hero .rounded-top { position:absolute; bottom:0; left:0; right:0; height:8px; background:white; border-radius:8px 8px 0 0; z-index:5; }
+
+    .title-section { padding:16px; }
+    .tag-selling { display:inline-flex; align-items:center; min-height:20px; padding:4px 12px; background:var(--color-text-main); border-radius:4px; font-size:12px; font-weight:400; line-height:16px; color:#fff; margin-bottom:12px; }
+    .title-section h1 { font-size:20px; font-weight:600; line-height:24px; margin-bottom:4px; }
+    .title-section .subtitle { font-size:14px; color:var(--color-text-subtle); line-height:20px; margin-top:4px; }
+
+    .description { padding:24px 16px; font-size:14px; line-height:20px; }
+    .description p { margin-bottom:12px; }
+    .description .desc-subtitle { font-weight:600; font-size:16px; margin-bottom:8px; margin-top:16px; }
+    .description ul { padding-left:20px; margin-bottom:12px; }
+    .description ul li { margin-bottom:4px; }
+    .description .info-list { list-style:none; padding-left:0; display:grid; gap:8px; margin-bottom:16px; }
+    .description .info-item { display:flex; gap:8px; }
+    .description .info-icon { width:24px; text-align:center; flex-shrink:0; }
+    .description .lineup-img { width:100%; border-radius:8px; margin:12px 0; }
+
+    .section-header { display:flex; align-items:center; gap:8px; padding:8px 16px; background:var(--color-bg-neutral); }
+    .section-header svg { width:24px; height:24px; flex-shrink:0; }
+    .section-header h2 { font-size:20px; font-weight:400; line-height:24px; flex:1; color:var(--color-text-main); }
+
+    /* Ticket Cards */
+    .cards-section { padding:0 0 8px; }
+    .cards-scroll { display:flex; gap:12px; overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; padding:0 16px 16px; scrollbar-width:none; }
+    .cards-scroll::-webkit-scrollbar { display:none; }
+    .ticket-card { flex-shrink:0; width:260px; scroll-snap-align:start; border:2px solid var(--color-border); border-radius:12px; overflow:hidden; background:#fff; cursor:pointer; transition:border-color 0.2s, box-shadow 0.2s, transform 0.3s; }
+    .ticket-card.active { border-color:var(--color-primary); box-shadow:0 0 0 2px rgba(0,121,202,0.25); }
+    .ticket-card:hover { transform:translateY(-2px); box-shadow:0 4px 12px rgba(0,0,0,0.12); }
+    .ticket-card .card-img { width:100%; aspect-ratio:272/153; object-fit:cover; display:block; }
+    .ticket-card .card-badge { position:absolute; bottom:0; left:0; right:0; text-align:center; font-size:13px; font-weight:400; padding:4px 12px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .ticket-card .card-badge--new { background:#73BFF6; color:var(--color-text-main); }
+    .ticket-card .card-badge--best { background:var(--color-accent); color:#fff; }
+    .ticket-card .card-img-wrap { position:relative; }
+    .ticket-card .card-body { padding:16px 12px 12px; display:flex; flex-direction:column; gap:10px; }
+    .ticket-card .card-title { font-size:16px; font-weight:600; text-align:center; }
+    .ticket-card .card-features { list-style:disc; padding-left:16px; font-size:13px; color:var(--color-text-subtle); display:grid; gap:3px; }
+    .ticket-card .card-price-row { font-size:14px; font-weight:600; text-align:center; color:var(--color-text-main); margin-top:auto; }
+
+    /* Ticket selector */
+    .ticket-selector { padding:0 16px 16px; }
+
+    /* Explode Pipe */
+    .pipe-row { display:flex; gap:8px; align-items:center; justify-content:flex-start; margin-bottom:12px; overflow-x:auto; scrollbar-width:none; padding:0 2px; }
+    .pipe-row::-webkit-scrollbar { display:none; }
+    .pipe-pill { flex-shrink:0; padding:8px 14px; border:1px solid var(--color-border); border-radius:8px; font-size:13px; font-weight:600; color:var(--color-text); background:white; cursor:pointer; white-space:nowrap; transition:all 0.15s; }
+    .pipe-pill.active { border-color:var(--color-primary); color:var(--color-primary); background:var(--color-primary-weak); }
+    .pipe-pill:active { transform:scale(0.96); }
+    .pipe-label { font-size:11px; font-weight:600; color:var(--color-text-subtle); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:6px; }
+
+    /* Session items */
+    .session-item { display:flex; gap:12px; align-items:center; min-height:72px; padding:12px 16px; border-bottom:1px dashed var(--color-border); cursor:pointer; transition:background 0.2s; }
+    .session-item:last-of-type { border-bottom:1px dashed var(--color-border); }
+    .session-item .si-radio { width:24px; height:24px; border-radius:50%; border:2px solid var(--color-border); flex-shrink:0; display:flex; align-items:center; justify-content:center; transition:border-color 0.2s; }
+    .session-item .si-radio::after { content:''; width:12px; height:12px; border-radius:50%; background:transparent; transition:background 0.2s; }
+    .session-item .si-body { flex:1; min-width:0; display:flex; flex-direction:column; }
+    .session-item .si-name { font-size:16px; font-weight:600; line-height:24px; color:var(--color-text-main); }
+    .session-item .si-desc { font-size:13px; color:var(--color-text-subtle); margin-top:2px; }
+    .session-item .si-price-col { display:flex; flex-direction:column; align-items:flex-end; gap:4px; flex-shrink:0; }
+    .session-item .si-price { font-size:16px; font-weight:600; line-height:24px; color:var(--color-text-main); white-space:nowrap; }
+    .session-item.active { background:var(--color-primary-weak); }
+    .session-item.active .si-radio { border-color:var(--color-primary); }
+    .session-item.active .si-radio::after { background:var(--color-primary); }
+    .session-item:not(.active) .si-name { color:var(--color-text-disable); }
+    .session-item:not(.active) .si-price { color:var(--color-text-disable); }
+
+    /* Stepper */
+    .ticket-stepper { display:flex; align-items:center; justify-content:center; gap:22px; padding:24px 40px; border-bottom:1px dashed var(--color-border); }
+    .step-btn { width:48px; height:48px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:20px; font-weight:400; border:2px solid #eee; transition:background 0.15s, color 0.15s; -webkit-user-select:none; user-select:none; }
+    .step-btn.minus { background:#f6f6f6; color:#06232c; }
+    .step-btn.plus { background:var(--color-primary); border-color:var(--color-primary); color:#fff; }
+    .step-btn:active { transform:scale(0.94); }
+    .step-count { flex:1; text-align:center; font-size:20px; font-weight:400; line-height:28px; color:var(--color-text-main); }
+
+    /* Reviews */
+    .reviews { padding:24px 16px; }
+    .reviews .reviews-title { font-size:20px; font-weight:600; margin-bottom:20px; }
+    .reviews-summary { display:flex; gap:20px; align-items:flex-start; margin-bottom:16px; }
+    .reviews-score-col { display:flex; flex-direction:column; align-items:center; min-width:80px; }
+    .reviews-score-col .score-number { font-size:40px; font-weight:600; line-height:1; }
+    .reviews-score-col .score-out-of { font-size:14px; color:var(--color-text-subtle); margin-top:2px; }
+    .reviews-score-col .score-stars { color:var(--color-rating); font-size:14px; letter-spacing:1px; margin-top:4px; }
+    .reviews-score-col .score-count { font-size:12px; color:var(--color-text-subtle); margin-top:4px; white-space:nowrap; }
+    .reviews-bars-col { flex:1; display:flex; flex-direction:column; gap:4px; padding-top:4px; }
+    .bar-row { display:flex; align-items:center; gap:8px; }
+    .bar-row .bar-label { font-size:12px; font-weight:600; color:var(--color-text-subtle); min-width:14px; text-align:right; }
+    .bar-row .bar-star { font-size:10px; color:var(--color-rating); }
+    .bar-row .bar-track { flex:1; height:6px; background:var(--color-border); border-radius:4px; overflow:hidden; }
+    .bar-row .bar-fill { height:100%; background:var(--color-rating); border-radius:4px; }
+    .bar-row .bar-pct { font-size:12px; color:var(--color-text-subtle); min-width:28px; text-align:right; }
+    .reviews-verified { display:flex; align-items:center; gap:6px; font-size:12px; color:var(--color-text-subtle); margin-bottom:16px; padding-bottom:14px; border-bottom:1px solid var(--color-border-light); }
+    .reviews-verified svg { width:14px; height:14px; color:var(--color-success); flex-shrink:0; }
+    .review-card { padding:14px 0; border-bottom:1px solid var(--color-border); }
+    .review-card:last-child { border-bottom:none; }
+    .review-card-header { display:flex; align-items:center; gap:8px; margin-bottom:8px; }
+    .review-avatar { width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:600; color:white; flex-shrink:0; }
+    .review-card-info { flex:1; }
+    .review-card-info .reviewer { font-size:14px; font-weight:600; }
+    .review-card-info .review-date { font-size:12px; color:var(--color-text-subtle); }
+    .review-card .review-stars { color:var(--color-rating); font-size:12px; letter-spacing:1px; margin-bottom:4px; }
+    .review-card .review-text { font-size:14px; line-height:20px; }
+
+    .help-section { border-bottom:1px solid var(--color-border); }
+    .help-content { padding:24px 16px; font-size:14px; line-height:20px; }
+    .help-content a { color:var(--color-primary); text-decoration:underline; }
+    .venue-wrap { border-bottom:1px solid var(--color-border); }
+    .venue-section { padding:24px 16px; }
+    .venue-section .venue-img { width:100%; height:200px; border-radius:8px; object-fit:cover; margin-bottom:12px; display:block; background:var(--color-bg-neutral); }
+    .venue-section .venue-name-lg { font-size:16px; font-weight:600; margin-bottom:8px; }
+    .venue-section .venue-desc { font-size:14px; line-height:20px; color:var(--color-text-subtle); }
+    .location-wrap { border-bottom:1px solid var(--color-border); }
+    .location { padding:24px 16px; }
+    .location .loc-name { font-weight:600; font-size:14px; margin-bottom:4px; }
+    .location .loc-address { font-size:14px; color:var(--color-text-subtle); margin-bottom:12px; }
+    .location .map-placeholder { width:100%; height:160px; background:var(--color-border-light); border-radius:8px; overflow:hidden; }
+    .location .map-placeholder iframe { width:100%; height:100%; border:0; }
+    .footer { background:var(--color-text-main); color:white; padding:32px 16px 80px; }
+    .footer-cols { display:flex; justify-content:space-between; margin-bottom:24px; }
+    .footer-col h5 { font-size:14px; font-weight:600; margin-bottom:8px; }
+    .footer-col ul { list-style:none; }
+    .footer-col ul li { font-size:14px; line-height:20px; margin-bottom:4px; }
+    .footer-col ul li a { color:rgba(255,255,255,0.7); text-decoration:none; }
+    .footer .legal { border-top:1px solid rgba(255,255,255,0.15); padding-top:16px; font-size:12px; color:rgba(255,255,255,0.5); }
+    .footer .legal a { color:white; }
+
+    .sticky-cta { position:fixed; bottom:0; width:393px; max-width:100vw; z-index:200; background:transparent; padding:12px 16px max(12px,env(safe-area-inset-bottom)); left:50%; transform:translateX(-50%); }
+    .sticky-cta .cta-btn { width:100%; height:48px; background:var(--color-primary); border:2px solid transparent; border-radius:64px; color:#fff; font-family:var(--font); font-weight:600; font-size:16px; line-height:24px; cursor:pointer; transition:background 0.15s,opacity 0.15s; outline:none; }
+    .sticky-cta .cta-btn:active { opacity:0.85; }
+    .sticky-cta .cta-btn:disabled { background:var(--color-bg-neutral); color:var(--color-text-disable); cursor:default; opacity:1; }
+    @media (max-width:393px) { .phone { width:100vw; } .sticky-cta { width:100vw; } }
+  </style>
+</head>
+<body>
+<div class="phone">
+
+  <header class="sticky-header">
+    <nav class="navbar">
+      <a href="#" class="logo-link"><svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 68.4 20.2105" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M4.27488 9.02021L4.27317 9.60492H6.85449C7.37256 9.60492 7.79278 10.0111 7.79278 10.5118V12.1928C7.79278 12.6936 7.37256 13.0998 6.85449 13.0998H4.27317V18.665C4.27317 19.166 3.85295 19.5719 3.33488 19.5719H0.938286C0.419971 19.5719 0 19.166 0 18.665V8.9695H0.00170819C0.0256229 4.36987 3.23288 0.568882 7.36231 0.00869932C7.92162-0.0672496 8.41846 0.36415 8.41846 0.91018V3.39031C8.41846 3.82101 8.10294 4.18353 7.66808 4.27646C5.74026 4.68876 4.27488 6.65895 4.27488 9.02021ZM59.9836 11.839H59.9815V18.6675C59.9815 19.1718 60.4191 19.5809 60.9589 19.5809H63.4338C63.9814 19.5809 64.422 19.1602 64.4108 18.6485L64.2604 11.839H64.2599C64.295 9.67459 65.7264 7.87505 67.6115 7.47666C68.0669 7.38045 68.4 7.01793 68.4 6.58153V4.3798C68.4 3.82581 67.8758 3.39368 67.2893 3.47208C63.1962 4.02061 60.023 7.55767 59.9836 11.839ZM53.8528 10.2684C53.7183 8.896 52.4071 7.55534 50.6251 7.55534C48.8095 7.55534 47.3303 8.86402 47.1284 10.2684H53.8528ZM57.4062 16.7992C57.7961 17.169 57.7796 17.7752 57.3695 18.1244C55.7847 19.4741 53.5592 20.2105 51.3841 20.2105C46.5087 20.2105 42.844 17.0188 42.844 12.1677C42.844 7.85856 45.9371 4.09247 50.7788 4.09247C55.2842 4.09247 58.4782 7.69909 58.4782 12.0078C58.4782 12.1123 58.476 12.217 58.4718 12.3206C58.4518 12.807 58.025 13.1888 57.5123 13.1888H47.0803C47.3157 15.359 49.1651 16.8593 51.4849 16.8593C52.9239 16.8593 54.1388 16.2601 54.9715 15.6184C55.3479 15.3284 55.8973 15.3666 56.24 15.6921L57.4062 16.7992ZM38.3146 4.63228L34.1248 13.5783L29.9352 4.63228C29.7812 4.30397 29.4408 4.09247 29.0653 4.09247H26.661C25.9656 4.09247 25.5041 4.78359 25.7948 5.38954L32.3664 19.1022C32.5221 19.4267 32.8604 19.6349 33.2328 19.6349H35.0167C35.3892 19.6349 35.7277 19.4267 35.8832 19.1022L42.455 5.38954C42.7454 4.78359 42.2839 4.09247 41.5886 4.09247H39.1842C38.8088 4.09247 38.4683 4.30397 38.3146 4.63228ZM21.2255 10.2684C21.091 8.896 19.7798 7.55534 17.9978 7.55534C16.1822 7.55534 14.7027 8.86402 14.501 10.2684H21.2255ZM24.5465 16.5786C25.0786 17.0837 25.0302 17.9154 24.4449 18.3647C22.8861 19.5613 20.7993 20.2105 18.7565 20.2105C13.8814 20.2105 10.2166 17.0188 10.2166 12.1677C10.2166 7.85856 13.3098 4.09247 18.1515 4.09247C22.6567 4.09247 25.8509 7.69909 25.8509 12.0078C25.8509 12.1123 25.8487 12.217 25.8444 12.3208C25.8245 12.807 25.3976 13.1888 24.8849 13.1888H14.453C14.6884 15.359 16.5375 16.8593 18.8576 16.8593C20.1783 16.8593 21.3105 16.3544 22.1315 15.7751C22.6437 15.4139 23.3513 15.444 23.8026 15.8724L24.5465 16.5786Z" fill="#031419"/></svg></a>
+      <div class="nav-icons">
+        <button class="nav-icon-btn" aria-label="Search"><svg viewBox="0 0 512 512" fill="currentColor"><path d="M384 208A176 176 0 1 0 32 208a176 176 0 1 0 352 0zM343.3 366C307 397.2 259.7 416 208 416C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208c0 51.7-18.8 99-50 135.3L507.3 484.7c6.2 6.2 6.2 16.4 0 22.6s-16.4 6.2-22.6 0L343.3 366z"/></svg></button>
+        <button class="nav-icon-btn" aria-label="Menu"><svg viewBox="0 0 448 512" fill="currentColor"><path d="M0 80c0-8.8 7.2-16 16-16H432c8.8 0 16 7.2 16 16s-7.2 16-16 16H16C7.2 96 0 88.8 0 80zM0 240c0-8.8 7.2-16 16-16H432c8.8 0 16 7.2 16 16s-7.2 16-16 16H16c-8.8 0-16-7.2-16-16zM448 400c0 8.8-7.2 16-16 16H16c-8.8 0-16-7.2-16-16s7.2-16 16-16H432c8.8 0 16 7.2 16 16z"/></svg></button>
+      </div>
+    </nav>
+  </header>
+
+  <div class="hero" id="heroCarousel">
+    <div class="carousel-track" id="carouselTrack">
+      <div class="carousel-slide"><img src="https://applications-media.feverup.com/image/upload/f_auto,w_720,h_720/fever2/plan/photo/64660934-f060-11f0-b1d7-a6bb0176d15e.png" alt="Rock in Rio Lisboa 2026"></div>
+      <div class="carousel-slide"><img src="https://applications-media.feverup.com/image/upload/f_auto,w_720,h_720/fever2/plan/photo/5b248206-f060-11f0-875f-669ec74fcdcc.png" alt="Rock in Rio Lisboa 2026"></div>
+      <div class="carousel-slide"><img src="https://applications-media.feverup.com/image/upload/f_auto,w_720,h_720/fever2/plan/photo/6cd23028-4702-11f0-97fd-b2820b800acb.jpg" alt="Rock in Rio Lisboa 2026"></div>
+      <div class="carousel-slide"><img src="https://applications-media.feverup.com/image/upload/f_auto,w_720,h_720/fever2/plan/photo/7938a4ea-ae96-11f0-b110-bab594ea555f" alt="Rock in Rio Lisboa 2026"></div>
+      <div class="carousel-slide"><img src="https://applications-media.feverup.com/image/upload/f_auto,w_720,h_720/fever2/plan/photo/7c53cc8e-f060-11f0-8197-3e47ddb7d28e.png" alt="Rock in Rio Lisboa 2026"></div>
+    </div>
+    <button class="nav-prev" aria-label="Prev"></button>
+    <button class="nav-next" aria-label="Next"></button>
+    <div class="side-buttons">
+      <button type="button" class="side-btn" id="likeBtn" aria-label="Like"><svg viewBox="0 0 512 512" fill="currentColor"><path d="M244 130.6l-12-13.5-4.2-4.7c-26-29.2-65.3-42.8-103.8-35.8c-53.3 9.7-92 56.1-92 110.3v3.5c0 32.3 13.4 63.1 37.1 85.1L253 446.8c.8 .7 1.9 1.2 3 1.2s2.2-.4 3-1.2L443 275.5c23.6-22 37-52.8 37-85.1v-3.5c0-54.2-38.7-100.6-92-110.3c-38.5-7-77.8 6.6-103.8 35.8l-4.2 4.7-12 13.5c-3 3.4-7.4 5.4-12 5.4s-8.9-2-12-5.4z"/></svg></button>
+      <button type="button" class="side-btn" aria-label="Share"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8M16 6l-4-4-4 4M12 2v13"/></svg></button>
+    </div>
+    <div class="shadow-overlay"><div class="slide-indicators" id="slideIndicators"></div></div>
+    <div class="rounded-top"></div>
+  </div>
+
+  <div class="title-section">
+    <div class="tag-selling">Official Partner</div>
+    <h1>Rock in Rio Lisboa 2026</h1>
+    <div class="subtitle">Parque Tejo, Lisbon &middot; June 20, 21, 27 &amp; 28, 2026</div>
+  </div>
+
+  <div class="description">
+    <p>On June 20, 21, 27, and 28, the festival comes back to Parque Tejo for its 11th edition, offering more space, more comfort, and a fully renewed experience from the moment you arrive to the final chord. If the last edition was already historic, get ready &mdash; this one will raise the bar even higher.</p>
+
+    <img class="lineup-img" src="https://images.feverup.com/plan/photo/77f30ff4-0b51-11f1-a026-26f340e11525.jpg" alt="Rock in Rio Lisboa 2026 Line-up" loading="lazy">
+
+    <p class="desc-subtitle">General Info</p>
+    <ul class="info-list">
+      <li class="info-item"><span class="info-icon">📅</span><span><strong>Dates:</strong> June 20, 21, 27, and 28, 2026</span></li>
+      <li class="info-item"><span class="info-icon">📍</span><span><strong>Location:</strong> Parque Tejo, Lisbon, Portugal</span></li>
+      <li class="info-item"><span class="info-icon">👤</span><span><strong>Minimum age:</strong> recommended minimum age is 6. Children under 3 are not allowed.</span></li>
+      <li class="info-item"><span class="info-icon">♿</span><span><strong>Accessibility:</strong> The venue ensures accessibility for people with reduced mobility.</span></li>
+    </ul>
+
+    <p class="desc-subtitle">Highlights</p>
+    <ul>
+      <li>🎸 Performances by top national and international artists</li>
+      <li>🍴 More restrooms, more dining areas, and improved facilities</li>
+      <li>🌍 Sustainability at the heart of the entire festival experience</li>
+    </ul>
+
+    <p class="desc-subtitle">Description</p>
+    <p>Since its debut in 2004, Rock in Rio Lisboa has transformed the city into a global music stage. The 2026 edition promises to elevate the experience even further, with a powerful international lineup, a new audiovisual show on the Main Stage, a brand-new Halftime Show in the clearing, additional fireworks, and new interactive attractions for all ages.</p>
+    <p>Join the Rock in Rio community and live an unforgettable celebration of music, diversity, and culture.</p>
+  </div>
+
+  <div class="section-header" id="ticket-section">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20.25 13.5" fill="none"><path d="M4.5 4.5C4.5 3.90234 4.99219 3.375 5.625 3.375H14.625C15.2227 3.375 15.75 3.90234 15.75 4.5V9C15.75 9.63281 15.2227 10.125 14.625 10.125H5.625C4.99219 10.125 4.5 9.63281 4.5 9V4.5ZM5.625 9H14.625V4.5H5.625V9ZM20.25 2.25V5.0625C19.3008 5.0625 18.5625 5.83594 18.5625 6.75C18.5625 7.69922 19.3008 8.4375 20.25 8.4375V11.25C20.25 12.5156 19.2305 13.5 18 13.5H2.25C0.984375 13.5 0 12.5156 0 11.25V8.4375C0.914062 8.4375 1.6875 7.69922 1.6875 6.75C1.6875 5.83594 0.914062 5.0625 0 5.0625V2.25C0 1.01953 0.984375 0 2.25 0H18C19.2305 0 20.25 1.01953 20.25 2.25ZM1.125 4.18359C2.10938 4.60547 2.8125 5.625 2.8125 6.75C2.8125 7.91016 2.10938 8.89453 1.125 9.35156V11.25C1.125 11.8828 1.61719 12.375 2.25 12.375H18C18.5977 12.375 19.125 11.8828 19.125 11.25V9.35156C18.1055 8.89453 17.4375 7.91016 17.4375 6.75C17.4375 5.625 18.1055 4.60547 19.125 4.18359V2.25C19.125 1.65234 18.5977 1.125 18 1.125H2.25C1.61719 1.125 1.125 1.65234 1.125 2.25V4.18359Z" fill="#06232C"/></svg>
+    <h2>Choose your ticket</h2>
+  </div>
+
+  <div class="ticket-selector">
+    <div class="cards-section" id="cardsSection">
+      <div class="cards-scroll" id="cardsScroll"></div>
+    </div>
+
+    <div class="pipe-label">Ticket type</div>
+    <div class="pipe-row" id="pipeL1"></div>
+
+    <div class="pipe-label" id="tierLabel">Tier</div>
+    <div class="pipe-row" id="pipeL2"></div>
+
+    <div id="sessionsPanel"></div>
+
+    <div class="ticket-stepper" id="ticketStepper">
+      <button class="step-btn minus" id="stepMinus">&minus;</button>
+      <span class="step-count" id="stepCount">1 ticket</span>
+      <button class="step-btn plus" id="stepPlus">+</button>
+    </div>
+  </div>
+
+  <div class="reviews" id="reviewsSection"></div>
+
+  <div class="help-section">
+    <div class="section-header">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" fill="none"><path d="M9 0C4.00781 0 0 4.04297 0 9C0 13.9922 4.00781 18 9 18C13.957 18 18 13.9922 18 9C18 4.04297 13.957 0 9 0ZM9 16.875C4.64062 16.875 1.125 13.3594 1.125 9C1.125 4.67578 4.64062 1.125 9 1.125C13.3242 1.125 16.875 4.67578 16.875 9C16.875 13.3594 13.3242 16.875 9 16.875ZM8.4375 12.0938C7.94531 12.0938 7.59375 12.4805 7.59375 12.9375C7.59375 13.4297 7.94531 13.7812 8.4375 13.7812C8.89453 13.7812 9.28125 13.4297 9.28125 12.9375C9.28125 12.4805 8.89453 12.0938 8.4375 12.0938ZM10.0195 4.5H7.94531C6.64453 4.5 5.625 5.55469 5.625 6.85547V7.17188C5.625 7.48828 5.87109 7.73438 6.1875 7.73438C6.46875 7.73438 6.75 7.48828 6.75 7.17188V6.85547C6.75 6.1875 7.27734 5.625 7.94531 5.625H10.0195C10.6875 5.625 11.25 6.1875 11.25 6.85547C11.25 7.27734 11.0039 7.69922 10.6172 7.91016L8.50781 8.96484C8.12109 9.17578 7.875 9.59766 7.875 10.0547V10.6875C7.875 11.0039 8.12109 11.25 8.4375 11.25C8.71875 11.25 9 11.0039 9 10.6875V10.0547C9 10.0195 9 9.98438 9.03516 9.94922L11.1445 8.89453C11.8828 8.47266 12.375 7.69922 12.375 6.85547C12.375 5.55469 11.3203 4.5 10.0195 4.5Z" fill="#06232C"/></svg>
+      <h2>Need help?</h2>
+    </div>
+    <div class="help-content">
+      Need assistance with your booking? <a href="https://fever.zendesk.com/hc/en-us" target="_blank">Contact Support here</a>.
+    </div>
+  </div>
+
+  <div class="venue-wrap">
+    <div class="section-header">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" fill="none"><path d="M16.875 7.3125C16.875 12.375 9 17.4375 9 17.4375C9 17.4375 1.125 12.375 1.125 7.3125C1.125 3.02344 4.64062 0 9 0C13.3242 0 16.875 3.02344 16.875 7.3125Z" fill="none" stroke="#06232C" stroke-width="1.2"/><circle cx="9" cy="7" r="2.5" fill="none" stroke="#06232C" stroke-width="1.2"/></svg>
+      <h2>About the venue</h2>
+    </div>
+    <div class="venue-section">
+      <img class="venue-img" src="https://applications-media.feverup.com/image/upload/f_auto,w_720,h_720/fever2/plan/photo/7938a4ea-ae96-11f0-b110-bab594ea555f" alt="Parque Tejo">
+      <div class="venue-name-lg">Parque Tejo</div>
+      <div class="venue-desc">Tejo Park, located in eastern Lisbon by the river, is a versatile spot for big outdoor events. In 2026, it will once again host Rock in Rio Lisbon, welcoming thousands of fans for an unforgettable festival experience.</div>
+    </div>
+  </div>
+
+  <div class="location-wrap">
+    <div class="section-header">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" fill="none"><path d="M16.875 7.3125C16.875 12.375 9 17.4375 9 17.4375C9 17.4375 1.125 12.375 1.125 7.3125C1.125 3.02344 4.64062 0 9 0C13.3242 0 16.875 3.02344 16.875 7.3125Z" fill="none" stroke="#06232C" stroke-width="1.2"/><circle cx="9" cy="7" r="2.5" fill="none" stroke="#06232C" stroke-width="1.2"/></svg>
+      <h2>Getting there</h2>
+    </div>
+    <div class="location">
+      <div class="loc-name">Parque Tejo</div>
+      <div class="loc-address">Passeio dos Her&oacute;is do Mar, Lisboa, 1990-059</div>
+      <div class="map-placeholder">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3112.6!2d-9.0928!3d38.7918!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd19318a0!2sParque+Tejo!5e0!3m2!1sen!2spt!4v1" allowfullscreen loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h5>About Fever</h5>
+        <ul>
+          <li><a href="#">Press</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Gift Cards</a></li>
+          <li><a href="#">Help Center</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Work with us</h5>
+        <ul>
+          <li><a href="#">Publish your event</a></li>
+          <li><a href="#">Affiliates</a></li>
+          <li><a href="#">Brand partnerships</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <a href="#">Terms of use</a> | <a href="#">Privacy policy</a>
+      <div>&copy;2026 &ndash; Fever</div>
+    </div>
+  </div>
+</div>
+
+<div class="sticky-cta" id="stickyCta">
+  <button class="cta-btn" id="stickyBtn">Tickets</button>
+</div>
+
+<script>
+/* ═══════════════════════════
+   DATA
+   ═══════════════════════════ */
+var TIERS = [
+  {
+    id:'lawn', name:'Lawn', dayPrice:89, weekendPrice:157,
+    img:'https://images.feverup.com/plan/photo/2ef6fe18-f063-11f0-95e2-3ee9ae75610a.jpg',
+    badge:null,
+    features:['One-day festival access']
+  },
+  {
+    id:'comfort', name:'Comfort Zone', dayPrice:179, weekendPrice:null,
+    img:'https://images.feverup.com/plan/photo/6390a184-c9e3-11f0-bada-32f547ca1359.jpg',
+    badge:{text:'New', cls:'card-badge--new'},
+    features:['One-day festival access','Exclusive food & drink areas','Private restrooms','Main Stage view']
+  },
+  {
+    id:'vip', name:'VIP', dayPrice:380, weekendPrice:null,
+    img:'https://images.feverup.com/plan/photo/637b71f6-c9e3-11f0-bada-32f547ca1359.jpg',
+    badge:{text:'Best Experience', cls:'card-badge--best'},
+    features:['One-day festival access','Open bar & Catering','Private restrooms','Cloakroom','Shuttle to entrance','Exclusive entry','Climate-controlled lounge','Panoramic terrace with Main Stage view']
+  },
+  {
+    id:'premium', name:'Premium Club', dayPrice:7380, weekendPrice:null,
+    img:'https://images.feverup.com/plan/photo/6396d004-c9e3-11f0-bada-32f547ca1359.jpg',
+    badge:null,
+    features:['10 tickets for one festival day','Open bar & Catering','Private restrooms','Cloakroom','Shuttle to entrance','Exclusive entry','Private reserved area for groups up to 10','Main Stage view']
+  }
+];
+
+var DAY_SESSIONS = [
+  {id:'jun20', label:'June 20', artist:'Katy Perry'},
+  {id:'jun21', label:'June 21', artist:'Linkin Park'},
+  {id:'jun27', label:'June 27', artist:'Rod Stewart'},
+  {id:'jun28', label:'June 28', artist:'Travis Scott'}
+];
+
+var WEEKEND_SESSIONS = [
+  {id:'wk1', label:'June 20 & 21', artist:'Weekend 1'},
+  {id:'wk2', label:'June 27 & 28', artist:'Weekend 2'}
+];
+
+/* ═══════════════════════════
+   STATE
+   ═══════════════════════════ */
+var currentL1 = 'day';
+var currentTier = 'lawn';
+var currentSession = 'jun20';
+var ticketQty = 1;
+
+/* ═══════════════════════════
+   DOM REFS
+   ═══════════════════════════ */
+var cardsScroll = document.getElementById('cardsScroll');
+var pipeL1 = document.getElementById('pipeL1');
+var pipeL2 = document.getElementById('pipeL2');
+var tierLabel = document.getElementById('tierLabel');
+var sessionsPanel = document.getElementById('sessionsPanel');
+var stepCount = document.getElementById('stepCount');
+var stickyBtn = document.getElementById('stickyBtn');
+var cardsSection = document.getElementById('cardsSection');
+
+/* ═══════════════════════════
+   RENDER CARDS
+   ═══════════════════════════ */
+function renderCards(){
+  cardsScroll.innerHTML = '';
+  var tiers = currentL1 === 'weekend' ? TIERS.filter(function(t){ return t.weekendPrice !== null; }) : TIERS;
+  tiers.forEach(function(t){
+    var price = currentL1 === 'weekend' ? t.weekendPrice : t.dayPrice;
+    var card = document.createElement('div');
+    card.className = 'ticket-card' + (t.id === currentTier ? ' active' : '');
+    card.setAttribute('data-tier', t.id);
+    var badgeHtml = '';
+    if(t.badge) badgeHtml = '<div class="card-badge '+t.badge.cls+'">'+t.badge.text+'</div>';
+    card.innerHTML =
+      '<div class="card-img-wrap"><img class="card-img" src="'+t.img+'" alt="'+t.name+'" loading="lazy">'+badgeHtml+'</div>'+
+      '<div class="card-body">'+
+        '<div class="card-title">'+t.name+'</div>'+
+        '<ul class="card-features">'+t.features.map(function(f){ return '<li>'+f+'</li>'; }).join('')+'</ul>'+
+        '<div class="card-price-row">&euro; '+price.toFixed(2)+'</div>'+
+      '</div>';
+    card.addEventListener('click', function(){
+      if(currentL1 === 'weekend' && t.weekendPrice === null) return;
+      currentTier = t.id;
+      if(currentL1 === 'weekend' && t.weekendPrice === null){
+        currentL1 = 'day';
+        renderPipeL1();
+      }
+      renderPipeL2();
+      renderSessions();
+      highlightCards();
+      updateCTA();
+    });
+    cardsScroll.appendChild(card);
+  });
+}
+
+function highlightCards(){
+  var cards = cardsScroll.querySelectorAll('.ticket-card');
+  cards.forEach(function(c){ c.classList.toggle('active', c.getAttribute('data-tier') === currentTier); });
+}
+
+function scrollCardIntoView(tierId){
+  var card = cardsScroll.querySelector('[data-tier="'+tierId+'"]');
+  if(!card) return;
+  var left = card.offsetLeft - cardsScroll.offsetLeft - 16;
+  cardsScroll.scrollTo({left:Math.max(0,left), behavior:'smooth'});
+}
+
+/* ═══════════════════════════
+   RENDER PIPE L1
+   ═══════════════════════════ */
+function renderPipeL1(){
+  pipeL1.innerHTML = '';
+  ['day','weekend'].forEach(function(id){
+    var pill = document.createElement('div');
+    pill.className = 'pipe-pill' + (id === currentL1 ? ' active' : '');
+    pill.textContent = id === 'day' ? 'Day Ticket' : 'Weekend Pass';
+    pill.addEventListener('click', function(){
+      currentL1 = id;
+      if(id === 'weekend'){
+        currentTier = 'lawn';
+        currentSession = 'wk1';
+      } else {
+        currentSession = 'jun20';
+      }
+      renderPipeL1();
+      renderCards();
+      renderPipeL2();
+      renderSessions();
+      updateCTA();
+    });
+    pipeL1.appendChild(pill);
+  });
+}
+
+/* ═══════════════════════════
+   RENDER PIPE L2
+   ═══════════════════════════ */
+function renderPipeL2(){
+  pipeL2.innerHTML = '';
+  if(currentL1 === 'weekend'){
+    tierLabel.textContent = '';
+    var pill = document.createElement('div');
+    pill.className = 'pipe-pill active';
+    pill.textContent = 'Pass';
+    pipeL2.appendChild(pill);
+  } else {
+    tierLabel.textContent = 'Tier';
+    TIERS.forEach(function(t){
+      var pill = document.createElement('div');
+      pill.className = 'pipe-pill' + (t.id === currentTier ? ' active' : '');
+      pill.textContent = t.name;
+      pill.addEventListener('click', function(){
+        currentTier = t.id;
+        highlightCards();
+        scrollCardIntoView(t.id);
+        renderPipeL2();
+        renderSessions();
+        updateCTA();
+      });
+      pipeL2.appendChild(pill);
+    });
+  }
+}
+
+/* ═══════════════════════════
+   RENDER SESSIONS
+   ═══════════════════════════ */
+function renderSessions(){
+  sessionsPanel.innerHTML = '';
+  var sessions = currentL1 === 'weekend' ? WEEKEND_SESSIONS : DAY_SESSIONS;
+  var tier = TIERS.find(function(t){ return t.id === currentTier; });
+  var price = currentL1 === 'weekend' ? (tier ? tier.weekendPrice : 157) : (tier ? tier.dayPrice : 89);
+
+  sessions.forEach(function(s){
+    var item = document.createElement('div');
+    item.className = 'session-item' + (s.id === currentSession ? ' active' : '');
+    item.innerHTML =
+      '<div class="si-radio"></div>'+
+      '<div class="si-body">'+
+        '<div class="si-name">'+s.label+(s.artist ? ' &mdash; '+s.artist : '')+'</div>'+
+        '<div class="si-desc">'+
+          (currentL1==='weekend' ? 'Weekend pass' : tier ? tier.name+' ticket' : 'Ticket')+
+        '</div>'+
+      '</div>'+
+      '<div class="si-price-col"><div class="si-price">&euro; '+price.toFixed(2)+'</div></div>';
+    item.addEventListener('click', function(){
+      currentSession = s.id;
+      renderSessions();
+      updateCTA();
+    });
+    sessionsPanel.appendChild(item);
+  });
+}
+
+/* ═══════════════════════════
+   STEPPER
+   ═══════════════════════════ */
+document.getElementById('stepMinus').addEventListener('click', function(){
+  ticketQty = Math.max(1, ticketQty - 1);
+  updateStepperDisplay();
+  updateCTA();
+});
+document.getElementById('stepPlus').addEventListener('click', function(){
+  ticketQty = Math.min(10, ticketQty + 1);
+  updateStepperDisplay();
+  updateCTA();
+});
+function updateStepperDisplay(){
+  stepCount.textContent = ticketQty + (ticketQty === 1 ? ' ticket' : ' tickets');
+}
+
+/* ═══════════════════════════
+   CTA
+   ═══════════════════════════ */
+var stickyMode = 'tickets';
+var hasSeen = false;
+
+function getTotal(){
+  var tier = TIERS.find(function(t){ return t.id === currentTier; });
+  if(!tier) return 0;
+  var price = currentL1 === 'weekend' ? tier.weekendPrice : tier.dayPrice;
+  if(!price) return 0;
+  return price * ticketQty;
+}
+
+function updateCTA(){
+  hasSeen = true;
+  stickyMode = 'getit';
+  var t = getTotal();
+  if(t > 0){
+    stickyBtn.textContent = '\u20ac ' + t.toFixed(2) + ' \u2014 Buy now';
+    stickyBtn.disabled = false;
+  } else {
+    stickyBtn.textContent = 'Select a ticket';
+    stickyBtn.disabled = false;
+  }
+}
+
+/* ═══════════════════════════
+   INIT
+   ═══════════════════════════ */
+renderPipeL1();
+renderCards();
+renderPipeL2();
+renderSessions();
+updateStepperDisplay();
+
+hasSeen = false;
+stickyMode = 'tickets';
+stickyBtn.textContent = 'Tickets';
+stickyBtn.disabled = false;
+
+var ticketSection = document.getElementById('ticket-section');
+var obs = new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    if(entry.isIntersecting){ hasSeen = true; stickyMode = 'getit'; updateCTA(); }
+    else if(!hasSeen){ stickyMode = 'tickets'; stickyBtn.textContent = 'Tickets'; stickyBtn.disabled = false; }
+    else { stickyMode = 'getit'; updateCTA(); }
+  });
+},{threshold:0.1});
+obs.observe(ticketSection);
+
+stickyBtn.addEventListener('click', function(){
+  if(stickyMode === 'tickets'){
+    var y = cardsSection.getBoundingClientRect().top + window.pageYOffset - (document.querySelector('.sticky-header').offsetHeight || 0);
+    window.scrollTo({top:Math.max(0, y), behavior:'smooth'});
+    if(getTotal() > 0){ stickyMode = 'getit'; updateCTA(); }
+  } else {
+    if(getTotal() <= 0) return;
+    alert('Booking confirmed for \u20ac' + getTotal().toFixed(2) + '.\n\nThank you for booking Rock in Rio Lisboa 2026!\nYou will receive a confirmation email.');
+  }
+});
+
+/* ═══════════════════════════
+   HERO CAROUSEL
+   ═══════════════════════════ */
+(function(){
+  var track = document.getElementById('carouselTrack');
+  var slides = track.children;
+  var total = slides.length;
+  var indicators = document.getElementById('slideIndicators');
+  var cur = 0, el = 0, lp = false;
+
+  var clone = slides[0].cloneNode(true);
+  track.appendChild(clone);
+
+  for(var i = 0; i < total; i++){
+    var b = document.createElement('div');
+    b.className = 'bar';
+    b.innerHTML = '<div class="fill"></div>';
+    indicators.appendChild(b);
+  }
+  var bars = indicators.querySelectorAll('.bar');
+
+  function ub(){
+    bars.forEach(function(b, idx){
+      var fill = b.querySelector('.fill');
+      b.classList.remove('done');
+      fill.style.transition = 'none';
+      fill.style.width = '0%';
+      if(idx < cur){
+        b.classList.add('done');
+      } else if(idx === cur){
+        void fill.offsetWidth;
+        fill.style.transition = 'width 5s linear';
+        fill.style.width = '100%';
+      }
+    });
+  }
+
+  function go(idx){
+    if(lp) return;
+    if(idx < 0) idx = total - 1;
+    if(idx >= total){
+      lp = true;
+      track.style.transform = 'translateX(-'+(total*100)+'%)';
+      cur = 0; el = 0; ub();
+      setTimeout(function(){
+        track.style.transition = 'none';
+        track.style.transform = 'translateX(0%)';
+        void track.offsetWidth;
+        track.style.transition = '';
+        lp = false;
+      }, 480);
+      return;
+    }
+    cur = idx;
+    track.style.transform = 'translateX(-'+(cur*100)+'%)';
+    el = 0;
+    ub();
+  }
+
+  document.querySelector('.hero .nav-prev').addEventListener('click', function(){ go(cur - 1); });
+  document.querySelector('.hero .nav-next').addEventListener('click', function(){ go(cur + 1); });
+
+  var autoInterval = 5000;
+  setInterval(function(){ go(cur + 1); }, autoInterval);
+  ub();
+
+  var tx = 0;
+  track.addEventListener('touchstart', function(e){ tx = e.touches[0].clientX; }, {passive:true});
+  track.addEventListener('touchend', function(e){
+    var dx = e.changedTouches[0].clientX - tx;
+    if(Math.abs(dx) > 40){ dx < 0 ? go(cur+1) : go(cur-1); }
+  });
+})();
+
+document.getElementById('likeBtn').addEventListener('click', function(){ this.querySelector('.side-btn') ? null : null; this.classList.toggle('liked'); });
+
+/* ═══════════════════════════
+   REVIEWS
+   ═══════════════════════════ */
+var REVIEWS = {
+  rating:4.8, count:5420, breakdown:[75,16,5,3,1],
+  list:[
+    {name:'Sofia M.', date:'Feb 2026', stars:5, text:'The VIP experience was absolutely worth it. Open bar, great food, and the panoramic terrace had an unreal view of the Main Stage.'},
+    {name:'João P.', date:'Jan 2026', stars:5, text:'Best festival in Portugal, hands down. The organization was flawless and the lineup was incredible. Already have my tickets for 2026!'},
+    {name:'Emma R.', date:'Dec 2025', stars:4, text:'Loved the Comfort Zone — having our own food area and bathrooms made a huge difference. Only 4 stars because the queues at the entrance were long.'},
+    {name:'Miguel S.', date:'Nov 2025', stars:5, text:'Rock in Rio is always magical. The fireworks, the energy, the crowd — nothing compares. Lisbon at its finest.'}
+  ]
+};
+
+(function(){
+  var sec = document.getElementById('reviewsSection');
+  var r = REVIEWS;
+  var starsStr = function(n){ var s=''; for(var i=0;i<5;i++) s += i<n?'★':'☆'; return s; };
+  var barsHtml = r.breakdown.map(function(pct, i){
+    return '<div class="bar-row"><span class="bar-label">'+(5-i)+'</span><span class="bar-star">★</span><div class="bar-track"><div class="bar-fill" style="width:'+pct+'%"></div></div><span class="bar-pct">'+pct+'%</span></div>';
+  }).join('');
+  var reviewsHtml = r.list.map(function(rv){
+    var colors = ['#0079ca','#6f41d7','#24a865','#eb0052','#ff8c00'];
+    var color = colors[rv.name.charCodeAt(0) % colors.length];
+    var initials = rv.name.split(' ').map(function(w){ return w[0]; }).join('');
+    return '<div class="review-card"><div class="review-card-header"><div class="review-avatar" style="background:'+color+'">'+initials+'</div><div class="review-card-info"><div class="reviewer">'+rv.name+'</div><div class="review-date">'+rv.date+'</div></div></div><div class="review-stars">'+starsStr(rv.stars)+'</div><div class="review-text">'+rv.text+'</div></div>';
+  }).join('');
+  sec.innerHTML =
+    '<h3 class="reviews-title">User reviews</h3>'+
+    '<div class="reviews-summary">'+
+      '<div class="reviews-score-col"><span class="score-number">'+r.rating+'</span><span class="score-out-of">/5</span><span class="score-stars">'+starsStr(Math.round(r.rating))+'</span><span class="score-count">'+r.count.toLocaleString()+' reviews</span></div>'+
+      '<div class="reviews-bars-col">'+barsHtml+'</div>'+
+    '</div>'+
+    '<div class="reviews-verified"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.78 5.97l-4.5 5a.75.75 0 0 1-1.06.02l-2-1.85a.75.75 0 1 1 1.02-1.1l1.46 1.35 3.98-4.42a.75.75 0 1 1 1.1 1z"/></svg> Verified reviews</div>'+
+    reviewsHtml;
+})();
+</script>
+</body>
+</html>

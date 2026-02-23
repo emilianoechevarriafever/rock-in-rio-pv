@@ -103,7 +103,11 @@
     .ticket-card .card-body { padding:16px 12px 12px; display:flex; flex-direction:column; gap:10px; }
     .ticket-card .card-title { font-size:16px; font-weight:600; text-align:center; }
     .ticket-card .card-features { list-style:disc; padding-left:16px; font-size:13px; color:var(--color-text-subtle); display:grid; gap:3px; }
-    .ticket-card .card-price-row { font-size:14px; font-weight:600; text-align:center; color:var(--color-text-main); margin-top:auto; }
+    .ticket-card .card-btns { display:flex; flex-direction:column; gap:8px; margin-top:auto; }
+    .ticket-card .card-btn-price { display:block; width:100%; padding:8px 0; border:1px solid var(--color-border); border-radius:64px; font-family:var(--font); font-size:13px; font-weight:600; text-align:center; background:#fff; color:var(--color-text-main); cursor:pointer; pointer-events:none; }
+    .ticket-card .card-btn-selected { display:block; width:100%; padding:8px 0; border:none; border-radius:64px; font-family:var(--font); font-size:13px; font-weight:600; text-align:center; background:var(--color-text-main); color:#fff; cursor:pointer; }
+    .ticket-card:not(.active) .card-btn-selected { display:none; }
+    .ticket-card.active .card-btn-price { background:var(--color-primary); color:#fff; border-color:var(--color-primary); }
 
     /* Ticket selector */
     .ticket-selector { padding:0 16px 16px; }
@@ -115,30 +119,33 @@
     .pipe-pill.active { border-color:var(--color-primary); color:var(--color-primary); background:var(--color-primary-weak); }
     .pipe-pill:active { transform:scale(0.96); }
     .pipe-label { font-size:11px; font-weight:600; color:var(--color-text-subtle); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:6px; }
+    .pipe-nav { display:flex; align-items:center; gap:0; margin-bottom:12px; }
+    .pipe-nav .pipe-row { flex:1; margin-bottom:0; }
 
-    /* Session items */
-    .session-item { display:flex; gap:12px; align-items:center; min-height:72px; padding:12px 16px; border-bottom:1px dashed var(--color-border); cursor:pointer; transition:background 0.2s; }
-    .session-item:last-of-type { border-bottom:1px dashed var(--color-border); }
-    .session-item .si-radio { width:24px; height:24px; border-radius:50%; border:2px solid var(--color-border); flex-shrink:0; display:flex; align-items:center; justify-content:center; transition:border-color 0.2s; }
-    .session-item .si-radio::after { content:''; width:12px; height:12px; border-radius:50%; background:transparent; transition:background 0.2s; }
-    .session-item .si-body { flex:1; min-width:0; display:flex; flex-direction:column; }
-    .session-item .si-name { font-size:16px; font-weight:600; line-height:24px; color:var(--color-text-main); }
-    .session-item .si-desc { font-size:13px; color:var(--color-text-subtle); margin-top:2px; }
-    .session-item .si-price-col { display:flex; flex-direction:column; align-items:flex-end; gap:4px; flex-shrink:0; }
-    .session-item .si-price { font-size:16px; font-weight:600; line-height:24px; color:var(--color-text-main); white-space:nowrap; }
-    .session-item.active { background:var(--color-primary-weak); }
-    .session-item.active .si-radio { border-color:var(--color-primary); }
-    .session-item.active .si-radio::after { background:var(--color-primary); }
-    .session-item:not(.active) .si-name { color:var(--color-text-disable); }
-    .session-item:not(.active) .si-price { color:var(--color-text-disable); }
+    /* Session rows with inline stepper */
+    .session-row { display:flex; gap:0; align-items:stretch; padding:12px 16px; border:2px solid var(--color-border); border-radius:12px; margin-bottom:12px; transition:border-color 0.2s; }
+    .session-row.has-qty { border-color:var(--color-primary); }
+    .session-row .sr-body { flex:1; min-width:0; display:flex; flex-direction:column; justify-content:center; }
+    .session-row .sr-name { font-size:15px; font-weight:600; line-height:22px; color:var(--color-text-main); }
+    .session-row .sr-link { font-size:12px; font-weight:600; color:var(--color-primary); cursor:pointer; margin-top:2px; }
+    .session-row .sr-link:hover { text-decoration:underline; }
+    .session-row .sr-price { font-size:14px; font-weight:600; color:var(--color-text-main); margin-top:4px; }
+    .session-row .sr-stepper { display:flex; align-items:center; gap:8px; flex-shrink:0; margin-left:12px; }
+    .session-row .sr-btn { width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:18px; font-weight:400; border:2px solid var(--color-border); background:#fff; color:var(--color-text-main); transition:all 0.15s; -webkit-user-select:none; user-select:none; }
+    .session-row .sr-btn.plus { background:var(--color-primary); border-color:var(--color-primary); color:#fff; }
+    .session-row .sr-btn:active { transform:scale(0.92); }
+    .session-row .sr-count { min-width:28px; text-align:center; font-size:16px; font-weight:500; color:var(--color-text-main); }
+    .session-row.sold-out { opacity:0.5; pointer-events:none; }
+    .session-row .sr-sold { font-size:12px; font-weight:600; color:var(--color-text-disable); }
 
-    /* Stepper */
-    .ticket-stepper { display:flex; align-items:center; justify-content:center; gap:22px; padding:24px 40px; border-bottom:1px dashed var(--color-border); }
-    .step-btn { width:48px; height:48px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:20px; font-weight:400; border:2px solid #eee; transition:background 0.15s, color 0.15s; -webkit-user-select:none; user-select:none; }
-    .step-btn.minus { background:#f6f6f6; color:#06232c; }
-    .step-btn.plus { background:var(--color-primary); border-color:var(--color-primary); color:#fff; }
-    .step-btn:active { transform:scale(0.94); }
-    .step-count { flex:1; text-align:center; font-size:20px; font-weight:400; line-height:28px; color:var(--color-text-main); }
+    .selector-cta { padding:12px 0 0; }
+    .selector-cta .sel-btn { width:100%; height:48px; border:none; border-radius:64px; font-family:var(--font); font-weight:600; font-size:16px; color:#fff; background:var(--color-primary); cursor:pointer; transition:background 0.15s, opacity 0.15s; }
+    .selector-cta .sel-btn:active { opacity:0.85; }
+    .selector-cta .sel-btn:disabled { background:var(--color-bg-neutral); color:var(--color-text-disable); cursor:default; }
+
+    .pipe-arrow { width:28px; height:28px; border:none; background:none; cursor:pointer; display:flex; align-items:center; justify-content:center; color:var(--color-text-subtle); font-size:18px; flex-shrink:0; padding:0; }
+    .pipe-arrow:hover { color:var(--color-text-main); }
+    .pipe-arrow.hidden { visibility:hidden; }
 
     /* Reviews */
     .reviews { padding:24px 16px; }
@@ -262,7 +269,7 @@
 
   <div class="section-header" id="ticket-section">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20.25 13.5" fill="none"><path d="M4.5 4.5C4.5 3.90234 4.99219 3.375 5.625 3.375H14.625C15.2227 3.375 15.75 3.90234 15.75 4.5V9C15.75 9.63281 15.2227 10.125 14.625 10.125H5.625C4.99219 10.125 4.5 9.63281 4.5 9V4.5ZM5.625 9H14.625V4.5H5.625V9ZM20.25 2.25V5.0625C19.3008 5.0625 18.5625 5.83594 18.5625 6.75C18.5625 7.69922 19.3008 8.4375 20.25 8.4375V11.25C20.25 12.5156 19.2305 13.5 18 13.5H2.25C0.984375 13.5 0 12.5156 0 11.25V8.4375C0.914062 8.4375 1.6875 7.69922 1.6875 6.75C1.6875 5.83594 0.914062 5.0625 0 5.0625V2.25C0 1.01953 0.984375 0 2.25 0H18C19.2305 0 20.25 1.01953 20.25 2.25ZM1.125 4.18359C2.10938 4.60547 2.8125 5.625 2.8125 6.75C2.8125 7.91016 2.10938 8.89453 1.125 9.35156V11.25C1.125 11.8828 1.61719 12.375 2.25 12.375H18C18.5977 12.375 19.125 11.8828 19.125 11.25V9.35156C18.1055 8.89453 17.4375 7.91016 17.4375 6.75C17.4375 5.625 18.1055 4.60547 19.125 4.18359V2.25C19.125 1.65234 18.5977 1.125 18 1.125H2.25C1.61719 1.125 1.125 1.65234 1.125 2.25V4.18359Z" fill="#06232C"/></svg>
-    <h2>Choose your ticket</h2>
+    <h2>Choose date &amp; ticket type</h2>
   </div>
 
   <div class="ticket-selector">
@@ -270,19 +277,16 @@
       <div class="cards-scroll" id="cardsScroll"></div>
     </div>
 
-    <div class="pipe-label">Ticket type</div>
     <div class="pipe-row" id="pipeL1"></div>
 
-    <div class="pipe-label" id="tierLabel">Tier</div>
-    <div class="pipe-row" id="pipeL2"></div>
+    <div class="pipe-nav" id="pipeL2Nav">
+      <button class="pipe-arrow" id="l2Left">&lsaquo;</button>
+      <div class="pipe-row" id="pipeL2" style="flex:1"></div>
+      <button class="pipe-arrow" id="l2Right">&rsaquo;</button>
+    </div>
 
     <div id="sessionsPanel"></div>
-
-    <div class="ticket-stepper" id="ticketStepper">
-      <button class="step-btn minus" id="stepMinus">&minus;</button>
-      <span class="step-count" id="stepCount">1 ticket</span>
-      <button class="step-btn plus" id="stepPlus">+</button>
-    </div>
+    <div id="selectorCta" class="selector-cta"></div>
   </div>
 
   <div class="reviews" id="reviewsSection"></div>
@@ -386,15 +390,15 @@ var TIERS = [
 ];
 
 var DAY_SESSIONS = [
-  {id:'jun20', label:'June 20', artist:'Katy Perry'},
-  {id:'jun21', label:'June 21', artist:'Linkin Park'},
-  {id:'jun27', label:'June 27', artist:'Rod Stewart'},
-  {id:'jun28', label:'June 28', artist:'Travis Scott'}
+  {id:'jun20', label:'20/Jun', artist:'Katy Perry', soldOut:false},
+  {id:'jun21', label:'21/Jun', artist:'Linkin Park', soldOut:false},
+  {id:'jun27', label:'27/Jun', artist:'Rod Stewart', soldOut:false},
+  {id:'jun28', label:'28/Jun', artist:'Travis Scott', soldOut:false}
 ];
 
 var WEEKEND_SESSIONS = [
-  {id:'wk1', label:'June 20 & 21', artist:'Weekend 1'},
-  {id:'wk2', label:'June 27 & 28', artist:'Weekend 2'}
+  {id:'wk1', label:'20 & 21/Jun', artist:'Katy Perry & Linkin Park', soldOut:false},
+  {id:'wk2', label:'27 & 28/Jun', artist:'Rod Stewart & Travis Scott', soldOut:false}
 ];
 
 /* ═══════════════════════════
@@ -402,8 +406,14 @@ var WEEKEND_SESSIONS = [
    ═══════════════════════════ */
 var currentL1 = 'day';
 var currentTier = 'lawn';
-var currentSession = 'jun20';
-var ticketQty = 1;
+var sessionQtys = {};
+
+function initQtys(){
+  sessionQtys = {};
+  var sessions = currentL1 === 'weekend' ? WEEKEND_SESSIONS : DAY_SESSIONS;
+  sessions.forEach(function(s, i){ sessionQtys[s.id] = (i === 0) ? 1 : 0; });
+}
+initQtys();
 
 /* ═══════════════════════════
    DOM REFS
@@ -411,11 +421,11 @@ var ticketQty = 1;
 var cardsScroll = document.getElementById('cardsScroll');
 var pipeL1 = document.getElementById('pipeL1');
 var pipeL2 = document.getElementById('pipeL2');
-var tierLabel = document.getElementById('tierLabel');
 var sessionsPanel = document.getElementById('sessionsPanel');
-var stepCount = document.getElementById('stepCount');
 var stickyBtn = document.getElementById('stickyBtn');
 var cardsSection = document.getElementById('cardsSection');
+var l2Left = document.getElementById('l2Left');
+var l2Right = document.getElementById('l2Right');
 
 /* ═══════════════════════════
    RENDER CARDS
@@ -430,18 +440,22 @@ function renderCards(){
     card.setAttribute('data-tier', t.id);
     var badgeHtml = '';
     if(t.badge) badgeHtml = '<div class="card-badge '+t.badge.cls+'">'+t.badge.text+'</div>';
+    var priceLabel = currentL1 === 'weekend' ? 'Weekend pass' : 'Day ticket';
     card.innerHTML =
       '<div class="card-img-wrap"><img class="card-img" src="'+t.img+'" alt="'+t.name+'" loading="lazy">'+badgeHtml+'</div>'+
       '<div class="card-body">'+
         '<div class="card-title">'+t.name+'</div>'+
         '<ul class="card-features">'+t.features.map(function(f){ return '<li>'+f+'</li>'; }).join('')+'</ul>'+
-        '<div class="card-price-row">&euro; '+price.toFixed(2)+'</div>'+
+        '<div class="card-btns">'+
+          '<div class="card-btn-price">'+priceLabel+' &ndash; &euro; '+price.toFixed(2)+'</div>'+
+          '<div class="card-btn-selected">Selected</div>'+
+        '</div>'+
       '</div>';
     card.addEventListener('click', function(){
-      if(currentL1 === 'weekend' && t.weekendPrice === null) return;
       currentTier = t.id;
       if(currentL1 === 'weekend' && t.weekendPrice === null){
         currentL1 = 'day';
+        initQtys();
         renderPipeL1();
       }
       renderPipeL2();
@@ -454,8 +468,9 @@ function renderCards(){
 }
 
 function highlightCards(){
-  var cards = cardsScroll.querySelectorAll('.ticket-card');
-  cards.forEach(function(c){ c.classList.toggle('active', c.getAttribute('data-tier') === currentTier); });
+  cardsScroll.querySelectorAll('.ticket-card').forEach(function(c){
+    c.classList.toggle('active', c.getAttribute('data-tier') === currentTier);
+  });
 }
 
 function scrollCardIntoView(tierId){
@@ -470,18 +485,15 @@ function scrollCardIntoView(tierId){
    ═══════════════════════════ */
 function renderPipeL1(){
   pipeL1.innerHTML = '';
-  ['day','weekend'].forEach(function(id){
+  [{id:'day',label:'Day Ticket'},{id:'weekend',label:'Weekend Pass'}].forEach(function(item){
     var pill = document.createElement('div');
-    pill.className = 'pipe-pill' + (id === currentL1 ? ' active' : '');
-    pill.textContent = id === 'day' ? 'Day Ticket' : 'Weekend Pass';
+    pill.className = 'pipe-pill' + (item.id === currentL1 ? ' active' : '');
+    pill.textContent = item.label;
     pill.addEventListener('click', function(){
-      currentL1 = id;
-      if(id === 'weekend'){
-        currentTier = 'lawn';
-        currentSession = 'wk1';
-      } else {
-        currentSession = 'jun20';
-      }
+      if(currentL1 === item.id) return;
+      currentL1 = item.id;
+      if(item.id === 'weekend') currentTier = 'lawn';
+      initQtys();
       renderPipeL1();
       renderCards();
       renderPipeL2();
@@ -495,16 +507,20 @@ function renderPipeL1(){
 /* ═══════════════════════════
    RENDER PIPE L2
    ═══════════════════════════ */
+var l2ScrollIdx = 0;
+
 function renderPipeL2(){
   pipeL2.innerHTML = '';
   if(currentL1 === 'weekend'){
-    tierLabel.textContent = '';
     var pill = document.createElement('div');
     pill.className = 'pipe-pill active';
     pill.textContent = 'Pass';
     pipeL2.appendChild(pill);
+    l2Left.classList.add('hidden');
+    l2Right.classList.add('hidden');
   } else {
-    tierLabel.textContent = 'Tier';
+    var tierIdx = TIERS.findIndex(function(t){ return t.id === currentTier; });
+    l2ScrollIdx = Math.max(0, tierIdx - 1);
     TIERS.forEach(function(t){
       var pill = document.createElement('div');
       pill.className = 'pipe-pill' + (t.id === currentTier ? ' active' : '');
@@ -519,11 +535,31 @@ function renderPipeL2(){
       });
       pipeL2.appendChild(pill);
     });
+    updateL2Arrows();
   }
 }
 
+function updateL2Arrows(){
+  var pills = pipeL2.querySelectorAll('.pipe-pill');
+  l2Left.classList.toggle('hidden', l2ScrollIdx <= 0);
+  l2Right.classList.toggle('hidden', l2ScrollIdx >= pills.length - 2);
+}
+
+l2Left.addEventListener('click', function(){
+  l2ScrollIdx = Math.max(0, l2ScrollIdx - 1);
+  var pills = pipeL2.querySelectorAll('.pipe-pill');
+  if(pills[l2ScrollIdx]) pills[l2ScrollIdx].scrollIntoView({behavior:'smooth', inline:'start', block:'nearest'});
+  updateL2Arrows();
+});
+l2Right.addEventListener('click', function(){
+  var pills = pipeL2.querySelectorAll('.pipe-pill');
+  l2ScrollIdx = Math.min(pills.length - 1, l2ScrollIdx + 1);
+  if(pills[l2ScrollIdx]) pills[l2ScrollIdx].scrollIntoView({behavior:'smooth', inline:'start', block:'nearest'});
+  updateL2Arrows();
+});
+
 /* ═══════════════════════════
-   RENDER SESSIONS
+   RENDER SESSIONS (per-row stepper)
    ═══════════════════════════ */
 function renderSessions(){
   sessionsPanel.innerHTML = '';
@@ -532,41 +568,36 @@ function renderSessions(){
   var price = currentL1 === 'weekend' ? (tier ? tier.weekendPrice : 157) : (tier ? tier.dayPrice : 89);
 
   sessions.forEach(function(s){
-    var item = document.createElement('div');
-    item.className = 'session-item' + (s.id === currentSession ? ' active' : '');
-    item.innerHTML =
-      '<div class="si-radio"></div>'+
-      '<div class="si-body">'+
-        '<div class="si-name">'+s.label+(s.artist ? ' &mdash; '+s.artist : '')+'</div>'+
-        '<div class="si-desc">'+
-          (currentL1==='weekend' ? 'Weekend pass' : tier ? tier.name+' ticket' : 'Ticket')+
-        '</div>'+
+    var qty = sessionQtys[s.id] || 0;
+    var row = document.createElement('div');
+    row.className = 'session-row' + (qty > 0 ? ' has-qty' : '') + (s.soldOut ? ' sold-out' : '');
+    row.innerHTML =
+      '<div class="sr-body">'+
+        '<div class="sr-name">'+s.label+' - '+s.artist+'</div>'+
+        '<div class="sr-link">See more</div>'+
+        '<div class="sr-price">&euro; '+price.toFixed(2)+'</div>'+
       '</div>'+
-      '<div class="si-price-col"><div class="si-price">&euro; '+price.toFixed(2)+'</div></div>';
-    item.addEventListener('click', function(){
-      currentSession = s.id;
+      (s.soldOut
+        ? '<div class="sr-stepper"><span class="sr-sold">Sold out</span></div>'
+        : '<div class="sr-stepper">'+
+            '<button class="sr-btn minus" data-sid="'+s.id+'">&minus;</button>'+
+            '<span class="sr-count">'+qty+'</span>'+
+            '<button class="sr-btn plus" data-sid="'+s.id+'">+</button>'+
+          '</div>'
+      );
+    sessionsPanel.appendChild(row);
+  });
+
+  sessionsPanel.querySelectorAll('.sr-btn').forEach(function(btn){
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var sid = btn.getAttribute('data-sid');
+      var delta = btn.classList.contains('plus') ? 1 : -1;
+      sessionQtys[sid] = Math.max(0, Math.min(10, (sessionQtys[sid]||0) + delta));
       renderSessions();
       updateCTA();
     });
-    sessionsPanel.appendChild(item);
   });
-}
-
-/* ═══════════════════════════
-   STEPPER
-   ═══════════════════════════ */
-document.getElementById('stepMinus').addEventListener('click', function(){
-  ticketQty = Math.max(1, ticketQty - 1);
-  updateStepperDisplay();
-  updateCTA();
-});
-document.getElementById('stepPlus').addEventListener('click', function(){
-  ticketQty = Math.min(10, ticketQty + 1);
-  updateStepperDisplay();
-  updateCTA();
-});
-function updateStepperDisplay(){
-  stepCount.textContent = ticketQty + (ticketQty === 1 ? ' ticket' : ' tickets');
 }
 
 /* ═══════════════════════════
@@ -580,19 +611,30 @@ function getTotal(){
   if(!tier) return 0;
   var price = currentL1 === 'weekend' ? tier.weekendPrice : tier.dayPrice;
   if(!price) return 0;
-  return price * ticketQty;
+  var totalQty = 0;
+  var sessions = currentL1 === 'weekend' ? WEEKEND_SESSIONS : DAY_SESSIONS;
+  sessions.forEach(function(s){ totalQty += (sessionQtys[s.id] || 0); });
+  return price * totalQty;
 }
+
+var selectorCtaEl = document.getElementById('selectorCta');
 
 function updateCTA(){
   hasSeen = true;
   stickyMode = 'getit';
   var t = getTotal();
+
   if(t > 0){
-    stickyBtn.textContent = '\u20ac ' + t.toFixed(2) + ' \u2014 Buy now';
+    stickyBtn.textContent = '\u20ac ' + t.toFixed(2) + ' \u2014 Add to cart';
     stickyBtn.disabled = false;
+    selectorCtaEl.innerHTML = '<button class="sel-btn">\u20ac ' + t.toFixed(2) + ' \u2014 Add to cart</button>';
+    selectorCtaEl.querySelector('.sel-btn').addEventListener('click', function(){
+      alert('Booking confirmed for \u20ac' + t.toFixed(2) + '.\n\nThank you for booking Rock in Rio Lisboa 2026!');
+    });
   } else {
-    stickyBtn.textContent = 'Select a ticket';
-    stickyBtn.disabled = false;
+    stickyBtn.textContent = 'Selection not available';
+    stickyBtn.disabled = true;
+    selectorCtaEl.innerHTML = '<button class="sel-btn" disabled>Selection not available</button>';
   }
 }
 
@@ -603,7 +645,6 @@ renderPipeL1();
 renderCards();
 renderPipeL2();
 renderSessions();
-updateStepperDisplay();
 
 hasSeen = false;
 stickyMode = 'tickets';

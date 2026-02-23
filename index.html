@@ -480,7 +480,56 @@ function initQtys(){
   var sessions = currentL1 === 'weekend' ? WEEKEND_SESSIONS : DAY_SESSIONS;
   sessions.forEach(function(s, i){ sessionQtys[s.id] = (i === 0) ? 1 : 0; });
 }
-initQtys();
+
+/* ═══════════════════════════
+   URL QUERY PARAMS SYNC
+   ═══════════════════════════ */
+function syncUrlFromState(){
+  var params = new URLSearchParams();
+  params.set('type', currentL1);
+  params.set('tier', currentTier);
+  var sessions = currentL1 === 'weekend' ? WEEKEND_SESSIONS : DAY_SESSIONS;
+  sessions.forEach(function(s){ params.set(s.id, sessionQtys[s.id] || 0); });
+  var newUrl = window.location.pathname + '?' + params.toString();
+  if(window.location.search !== '?' + params.toString()){
+    history.pushState({l1:currentL1, tier:currentTier, qtys:Object.assign({},sessionQtys)}, '', newUrl);
+  }
+}
+
+function readStateFromUrl(){
+  var params = new URLSearchParams(window.location.search);
+  if(!params.has('type') && !params.has('tier')) return false;
+  var l1 = params.get('type');
+  if(l1 === 'day' || l1 === 'weekend') currentL1 = l1;
+  var tier = params.get('tier');
+  if(TIERS.some(function(t){ return t.id === tier; })) currentTier = tier;
+  if(currentL1 === 'weekend' && currentTier !== 'lawn') currentTier = 'lawn';
+  initQtys();
+  var sessions = currentL1 === 'weekend' ? WEEKEND_SESSIONS : DAY_SESSIONS;
+  sessions.forEach(function(s){
+    var v = parseInt(params.get(s.id), 10);
+    if(!isNaN(v) && v >= 0 && v <= 10) sessionQtys[s.id] = v;
+  });
+  return true;
+}
+
+window.addEventListener('popstate', function(e){
+  if(e.state && e.state.l1){
+    currentL1 = e.state.l1;
+    currentTier = e.state.tier;
+    sessionQtys = e.state.qtys || {};
+  } else {
+    readStateFromUrl();
+  }
+  renderPipeL1();
+  renderCards();
+  renderPipeL2();
+  renderSessions();
+  updateCTA();
+});
+
+var hadUrlState = readStateFromUrl();
+if(!hadUrlState) initQtys();
 
 /* ═══════════════════════════
    DOM REFS
@@ -557,6 +606,7 @@ function renderCards(){
         renderCards();
         scrollCardIntoView(t.id);
         updateCTA();
+        syncUrlFromState();
         scrollToPipe();
       });
     });
@@ -572,6 +622,7 @@ function renderCards(){
       renderSessions();
       renderCards();
       updateCTA();
+      syncUrlFromState();
       scrollToPipe();
     });
     cardsScroll.appendChild(card);
@@ -606,6 +657,7 @@ function renderPipeL1(){
       renderPipeL2();
       renderSessions();
       updateCTA();
+      syncUrlFromState();
     });
     pipeL1.appendChild(pill);
   });
@@ -639,6 +691,7 @@ function renderPipeL2(){
         renderPipeL2();
         renderSessions();
         updateCTA();
+        syncUrlFromState();
       });
       pipeL2.appendChild(pill);
     });
@@ -708,6 +761,7 @@ function renderSessions(){
       sessionQtys[sid] = Math.max(0, Math.min(10, (sessionQtys[sid]||0) + delta));
       renderSessions();
       updateCTA();
+      syncUrlFromState();
     });
   });
 }
@@ -757,6 +811,15 @@ renderPipeL1();
 renderCards();
 renderPipeL2();
 renderSessions();
+
+(function(){
+  var params = new URLSearchParams();
+  params.set('type', currentL1);
+  params.set('tier', currentTier);
+  var sessions = currentL1 === 'weekend' ? WEEKEND_SESSIONS : DAY_SESSIONS;
+  sessions.forEach(function(s){ params.set(s.id, sessionQtys[s.id] || 0); });
+  history.replaceState({l1:currentL1, tier:currentTier, qtys:Object.assign({},sessionQtys)}, '', window.location.pathname + '?' + params.toString());
+})();
 
 hasSeen = false;
 stickyMode = 'tickets';

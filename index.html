@@ -126,8 +126,8 @@
     .pipe-pill .pill-check .corner-tri { position:absolute; top:0; right:0; width:22px; height:22px; }
     .pipe-pill .pill-check .check-icon { position:absolute; top:2px; right:2px; width:9px; height:9px; fill:none; stroke:#fff; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
     .pipe-pill.active .pill-check { display:block; }
-    .pipe-nav { display:flex; align-items:center; gap:0; margin-bottom:16px; }
-    .pipe-nav .pipe-row { flex:1; margin-bottom:0; }
+    .pipe-nav { position:relative; margin-bottom:16px; }
+    .pipe-nav .pipe-row { margin-bottom:0; padding:0 2px; }
     .pipe-nav .pipe-row.single-pill { justify-content:center; }
 
     /* Ticket rows — Polar Sounds ticket silhouette with center perforation */
@@ -209,9 +209,11 @@
     .selector-cta .sel-btn:active { opacity:0.85; }
     .selector-cta .sel-btn:disabled { background:var(--color-bg-neutral); color:var(--color-text-disable); cursor:default; }
 
-    .pipe-arrow { width:28px; height:28px; border:none; background:none; cursor:pointer; display:flex; align-items:center; justify-content:center; color:var(--color-text-subtle); font-size:18px; flex-shrink:0; padding:0; }
+    .pipe-arrow { position:absolute; top:50%; transform:translateY(-50%); z-index:2; width:28px; height:28px; border:none; background:rgba(255,255,255,0.85); cursor:pointer; display:flex; align-items:center; justify-content:center; color:var(--color-text-subtle); font-size:18px; padding:0; border-radius:50%; }
     .pipe-arrow:hover { color:var(--color-text-main); }
-    .pipe-arrow.hidden { visibility:hidden; width:0; overflow:hidden; padding:0; }
+    .pipe-arrow.hidden { display:none; }
+    #l2Left { left:-2px; }
+    #l2Right { right:-2px; }
 
     /* Reviews */
     .reviews { padding:24px 16px; }
@@ -350,7 +352,7 @@
 
     <div class="pipe-nav" id="pipeL2Nav">
       <button class="pipe-arrow" id="l2Left">&lsaquo;</button>
-      <div class="pipe-row" id="pipeL2" style="flex:1"></div>
+      <div class="pipe-row" id="pipeL2"></div>
       <button class="pipe-arrow" id="l2Right">&rsaquo;</button>
     </div>
     <div class="pipe-separator"></div>

@@ -115,14 +115,16 @@
     .pipe-row { display:flex; gap:12px; align-items:center; justify-content:flex-start; margin-bottom:16px; overflow-x:auto; scrollbar-width:none; padding:0 2px; }
     .pipe-row::-webkit-scrollbar { display:none; }
     .pipe-row.pipe-l1 { gap:12px; }
-    .pipe-row.pipe-l1 .pipe-pill { flex:1; text-align:center; }
+    .pipe-row.pipe-l1 .pipe-pill { flex:1; text-align:center; padding:6px 12px; border-radius:4px; font-size:14px; font-weight:400; line-height:20px; border-width:1px; border-color:#ccd2d8; color:#031419; background:#fff; overflow:hidden; }
+    .pipe-row.pipe-l1 .pipe-pill.active { border-color:var(--color-primary); color:var(--color-primary); background:#fff; }
     .pipe-separator { height:1px; background:var(--color-border); margin-bottom:16px; }
     .pipe-pill { position:relative; flex-shrink:0; padding:14px 20px; border:1.5px solid var(--color-border); border-radius:10px; font-size:14px; font-weight:600; color:var(--color-text); background:white; cursor:pointer; white-space:nowrap; transition:all 0.15s; }
     .pipe-pill.active { border-color:var(--color-primary); color:var(--color-primary); background:var(--color-primary-weak); }
     .pipe-pill:active { transform:scale(0.96); }
-    .pipe-pill .pill-check { position:absolute; top:-1px; right:-1px; width:20px; height:20px; background:var(--color-primary); border-radius:0 9px 0 6px; display:none; align-items:center; justify-content:center; }
-    .pipe-pill .pill-check svg { width:10px; height:10px; fill:none; stroke:#fff; stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; }
-    .pipe-pill.active .pill-check { display:flex; }
+    .pipe-pill .pill-check { position:absolute; top:0; right:0; width:22px; height:22px; display:none; pointer-events:none; overflow:hidden; }
+    .pipe-pill .pill-check .corner-tri { position:absolute; top:0; right:0; width:22px; height:22px; }
+    .pipe-pill .pill-check .check-icon { position:absolute; top:2px; right:2px; width:9px; height:9px; fill:none; stroke:#fff; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+    .pipe-pill.active .pill-check { display:block; }
     .pipe-nav { display:flex; align-items:center; gap:0; margin-bottom:16px; }
     .pipe-nav .pipe-row { flex:1; margin-bottom:0; }
 
@@ -581,7 +583,7 @@ function scrollCardIntoView(tierId){
   cardsScroll.scrollTo({left:Math.max(0,left), behavior:'smooth'});
 }
 
-var checkSvg = '<span class="pill-check"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></span>';
+var checkSvg = '<span class="pill-check"><svg class="corner-tri" viewBox="0 0 22 22"><path d="M0 0h22v22L0 0z" fill="currentColor" style="color:var(--color-primary)"/></svg><svg class="check-icon" viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></span>';
 
 /* ═══════════════════════════
    RENDER PIPE L1

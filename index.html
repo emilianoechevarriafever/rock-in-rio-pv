@@ -508,16 +508,15 @@ function getSessionIdFromState(){
 
 function syncUrlFromState(){
   var sid = getSessionIdFromState();
-  var params = new URLSearchParams(window.location.search);
-  if(params.get('session_id') === sid) return;
-  params.set('session_id', sid);
-  var newUrl = window.location.pathname + '?' + params.toString();
-  history.pushState({session_id:sid}, '', newUrl);
+  var current = new URLSearchParams(window.location.search).get('session_ids');
+  if(current === sid) return;
+  var newUrl = window.location.pathname + '?session_ids=' + sid;
+  history.pushState({session_ids:sid}, '', newUrl);
 }
 
 function readStateFromUrl(){
   var params = new URLSearchParams(window.location.search);
-  var sid = params.get('session_id');
+  var sid = params.get('session_ids');
   if(!sid) return false;
   var mapping = SESSION_ID_REVERSE[sid];
   if(!mapping) return false;
@@ -531,8 +530,8 @@ function readStateFromUrl(){
 }
 
 window.addEventListener('popstate', function(e){
-  if(e.state && e.state.session_id){
-    var mapping = SESSION_ID_REVERSE[e.state.session_id];
+  if(e.state && e.state.session_ids){
+    var mapping = SESSION_ID_REVERSE[e.state.session_ids];
     if(mapping){
       var parts = mapping.split('_');
       currentTier = parts[0];
@@ -836,9 +835,7 @@ renderSessions();
 
 (function(){
   var sid = getSessionIdFromState();
-  var params = new URLSearchParams(window.location.search);
-  params.set('session_id', sid);
-  history.replaceState({session_id:sid}, '', window.location.pathname + '?' + params.toString());
+  history.replaceState({session_ids:sid}, '', window.location.pathname + '?session_ids=' + sid);
 })();
 
 hasSeen = false;

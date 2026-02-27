@@ -90,10 +90,10 @@
 
     /* Ticket Cards */
     .cards-section { padding:8px 0; }
-    .cards-scroll { display:flex; gap:12px; overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; padding:0 16px 16px; scrollbar-width:none; min-height:340px; }
+    .cards-scroll { display:flex; gap:12px; overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; padding:0 16px 16px; scrollbar-width:none; min-height:380px; }
     .cards-scroll.single-card { justify-content:center; overflow-x:visible; }
     .cards-scroll::-webkit-scrollbar { display:none; }
-    .ticket-card { flex-shrink:0; width:260px; height:320px; scroll-snap-align:start; border:2px solid var(--color-border); border-radius:12px; overflow:hidden; background:#fff; cursor:pointer; transition:border-color 0.2s, box-shadow 0.2s, transform 0.3s; display:flex; flex-direction:column; }
+    .ticket-card { flex-shrink:0; width:260px; height:360px; scroll-snap-align:start; border:2px solid var(--color-border); border-radius:12px; overflow:hidden; background:#fff; cursor:pointer; transition:border-color 0.2s, box-shadow 0.2s, transform 0.3s; display:flex; flex-direction:column; }
     .ticket-card.active { border-color:var(--color-primary); box-shadow:0 0 0 2px rgba(0,121,202,0.25); }
     .ticket-card:hover { transform:translateY(-2px); box-shadow:0 4px 12px rgba(0,0,0,0.12); }
     .ticket-card .card-img { width:100%; aspect-ratio:272/153; object-fit:cover; display:block; }
@@ -101,7 +101,7 @@
     .ticket-card .card-badge--new { background:#73BFF6; color:var(--color-text-main); }
     .ticket-card .card-badge--best { background:var(--color-accent); color:#fff; }
     .ticket-card .card-img-wrap { position:relative; }
-    .ticket-card .card-body { padding:16px 12px 12px; display:flex; flex-direction:column; gap:10px; flex:1; }
+    .ticket-card .card-body { padding:16px 12px 10px; display:flex; flex-direction:column; gap:10px; flex:1; }
     .ticket-card .card-title { font-size:16px; font-weight:600; text-align:center; }
     .ticket-card .card-features { list-style:disc; padding-left:16px; font-size:13px; color:var(--color-text-subtle); display:grid; gap:3px; }
     .ticket-card .card-btns { display:flex; flex-direction:column; gap:8px; margin-top:auto; }

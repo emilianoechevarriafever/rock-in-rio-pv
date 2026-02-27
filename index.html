@@ -126,9 +126,6 @@
     .pipe-pill .pill-check .corner-tri { position:absolute; top:0; right:0; width:22px; height:22px; }
     .pipe-pill .pill-check .check-icon { position:absolute; top:2px; right:2px; width:9px; height:9px; fill:none; stroke:#fff; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
     .pipe-pill.active .pill-check { display:block; }
-    .pipe-nav { position:relative; margin-bottom:16px; }
-    .pipe-nav .pipe-row { margin-bottom:0; padding:0 2px; }
-    .pipe-nav .pipe-row.single-pill { justify-content:center; }
 
     /* Ticket rows — Polar Sounds ticket silhouette with center perforation */
     .ticket-row { --ticket-border:var(--color-border); display:flex; align-items:stretch; min-height:92px; margin-bottom:16px; position:relative; border-radius:8px; overflow:visible; background:transparent; }
@@ -209,11 +206,6 @@
     .selector-cta .sel-btn:active { opacity:0.85; }
     .selector-cta .sel-btn:disabled { background:var(--color-bg-neutral); color:var(--color-text-disable); cursor:default; }
 
-    .pipe-arrow { position:absolute; top:0; bottom:0; z-index:2; width:44px; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; color:var(--color-text-subtle); font-size:18px; padding:0; }
-    .pipe-arrow:hover { color:var(--color-text-main); }
-    .pipe-arrow.hidden { display:none; }
-    #l2Left { left:0; background:linear-gradient(to right, #fff 40%, transparent); }
-    #l2Right { right:0; background:linear-gradient(to left, #fff 40%, transparent); }
 
     /* Reviews */
     .reviews { padding:24px 16px; }
@@ -343,19 +335,12 @@
   </div>
 
   <div class="ticket-selector">
-    <div class="cards-section" id="cardsSection">
-      <div class="cards-scroll" id="cardsScroll"></div>
-    </div>
-
     <div class="pipe-row pipe-l1" id="pipeL1"></div>
     <div class="pipe-separator"></div>
 
-    <div class="pipe-nav" id="pipeL2Nav">
-      <button class="pipe-arrow" id="l2Left">&lsaquo;</button>
-      <div class="pipe-row" id="pipeL2"></div>
-      <button class="pipe-arrow" id="l2Right">&rsaquo;</button>
+    <div class="cards-section" id="cardsSection">
+      <div class="cards-scroll" id="cardsScroll"></div>
     </div>
-    <div class="pipe-separator"></div>
 
     <div id="sessionsPanel"></div>
     <div id="selectorCta" class="selector-cta"></div>
@@ -546,7 +531,6 @@ window.addEventListener('popstate', function(e){
   }
   renderPipeL1();
   renderCards();
-  renderPipeL2();
   renderSessions();
   updateCTA();
 });
@@ -559,18 +543,22 @@ if(!hadUrlState) initQtys();
    ═══════════════════════════ */
 var cardsScroll = document.getElementById('cardsScroll');
 var pipeL1 = document.getElementById('pipeL1');
-var pipeL2 = document.getElementById('pipeL2');
 var sessionsPanel = document.getElementById('sessionsPanel');
 var stickyBtn = document.getElementById('stickyBtn');
 var cardsSection = document.getElementById('cardsSection');
-var l2Left = document.getElementById('l2Left');
-var l2Right = document.getElementById('l2Right');
 
 /* ═══════════════════════════
    RENDER CARDS
    ═══════════════════════════ */
 function renderCards(){
   cardsScroll.innerHTML = '';
+
+  if(currentL1 === 'weekend'){
+    cardsSection.style.display = 'none';
+    return;
+  }
+  cardsSection.style.display = '';
+
   TIERS.forEach(function(t){
     var isActive = t.id === currentTier;
     var card = document.createElement('div');
@@ -579,74 +567,22 @@ function renderCards(){
     var badgeHtml = '';
     if(t.badge) badgeHtml = '<div class="card-badge '+t.badge.cls+'">'+t.badge.text+'</div>';
 
-    var hasBothPrices = t.weekendPrice !== null;
-    var btnsHtml = '';
-
-    if(hasBothPrices){
-      if(currentL1 === 'weekend'){
-        btnsHtml += isActive
-          ? '<div class="card-btn-selected">Seleciona os dias</div>'
-          : '<div class="card-btn-price card-btn-secondary" data-switch-l1="weekend">Entrada de 2 dias &ndash; &euro; '+t.weekendPrice.toFixed(2)+'</div>';
-        btnsHtml += '<div class="card-btn-price" data-switch-l1="day">Entrada de 1 dia &ndash; &euro; '+t.dayPrice.toFixed(2)+'</div>';
-      } else {
-        btnsHtml += '<div class="card-btn-price card-btn-secondary" data-switch-l1="weekend">Entrada de 2 dias &ndash; &euro; '+t.weekendPrice.toFixed(2)+'</div>';
-        btnsHtml += isActive
-          ? '<div class="card-btn-selected">Seleciona o dia</div>'
-          : '<div class="card-btn-price" data-switch-l1="day">Entrada de 1 dia &ndash; &euro; '+t.dayPrice.toFixed(2)+'</div>';
-      }
-    } else {
-      btnsHtml += isActive
-        ? '<div class="card-btn-selected">Seleciona o dia</div>'
-        : '<div class="card-btn-price" data-switch-l1="day">Entrada de 1 dia &ndash; &euro; '+t.dayPrice.toFixed(2)+'</div>';
-    }
-
     card.innerHTML =
       '<div class="card-img-wrap"><img class="card-img" src="'+t.img+'" alt="'+t.name+'" loading="lazy">'+badgeHtml+'</div>'+
       '<div class="card-body">'+
         '<div class="card-title">'+t.name+'</div>'+
         '<ul class="card-features">'+t.features.map(function(f){ return '<li>'+f+'</li>'; }).join('')+'</ul>'+
-        '<div class="card-btns">'+btnsHtml+'</div>'+
       '</div>';
-
-    function scrollToPipe(){
-      var headerH = document.querySelector('.sticky-header').offsetHeight || 0;
-      var y = sessionsPanel.getBoundingClientRect().top + window.pageYOffset - headerH - 8;
-      window.scrollTo({top:Math.max(0,y), behavior:'smooth'});
-    }
-
-    card.querySelectorAll('.card-btn-price[data-switch-l1]').forEach(function(btn){
-      btn.addEventListener('click', function(e){
-        e.stopPropagation();
-        var targetL1 = btn.getAttribute('data-switch-l1');
-        currentTier = t.id;
-        if(targetL1 !== currentL1){
-          currentL1 = targetL1;
-          initQtys();
-          renderPipeL1();
-        }
-        renderPipeL2();
-        renderSessions();
-        renderCards();
-        scrollCardIntoView(t.id);
-        updateCTA();
-        syncUrlFromState();
-        scrollToPipe();
-      });
-    });
 
     card.addEventListener('click', function(){
       currentTier = t.id;
-      if(currentL1 === 'weekend' && t.weekendPrice === null){
-        currentL1 = 'day';
-        initQtys();
-        renderPipeL1();
-      }
-      renderPipeL2();
       renderSessions();
       renderCards();
       updateCTA();
       syncUrlFromState();
-      scrollToPipe();
+      var headerH = document.querySelector('.sticky-header').offsetHeight || 0;
+      var y = sessionsPanel.getBoundingClientRect().top + window.pageYOffset - headerH - 8;
+      window.scrollTo({top:Math.max(0,y), behavior:'smooth'});
     });
     cardsScroll.appendChild(card);
   });
@@ -677,7 +613,6 @@ function renderPipeL1(){
       initQtys();
       renderPipeL1();
       renderCards();
-      renderPipeL2();
       renderSessions();
       updateCTA();
       syncUrlFromState();
@@ -686,62 +621,6 @@ function renderPipeL1(){
   });
 }
 
-/* ═══════════════════════════
-   RENDER PIPE L2
-   ═══════════════════════════ */
-var l2ScrollIdx = 0;
-
-function renderPipeL2(){
-  pipeL2.innerHTML = '';
-  if(currentL1 === 'weekend'){
-    pipeL2.classList.add('single-pill');
-    var pill = document.createElement('div');
-    pill.className = 'pipe-pill active';
-    pill.innerHTML = 'Passe' + checkSvg;
-    pipeL2.appendChild(pill);
-    l2Left.classList.add('hidden');
-    l2Right.classList.add('hidden');
-  } else {
-    pipeL2.classList.remove('single-pill');
-    var tierIdx = TIERS.findIndex(function(t){ return t.id === currentTier; });
-    l2ScrollIdx = Math.max(0, tierIdx - 1);
-    TIERS.forEach(function(t){
-      var pill = document.createElement('div');
-      pill.className = 'pipe-pill' + (t.id === currentTier ? ' active' : '');
-      pill.innerHTML = t.name + checkSvg;
-      pill.addEventListener('click', function(){
-        currentTier = t.id;
-        renderCards();
-        scrollCardIntoView(t.id);
-        renderPipeL2();
-        renderSessions();
-        updateCTA();
-        syncUrlFromState();
-      });
-      pipeL2.appendChild(pill);
-    });
-    updateL2Arrows();
-  }
-}
-
-function updateL2Arrows(){
-  var pills = pipeL2.querySelectorAll('.pipe-pill');
-  l2Left.classList.toggle('hidden', l2ScrollIdx <= 0);
-  l2Right.classList.toggle('hidden', l2ScrollIdx >= pills.length - 2);
-}
-
-l2Left.addEventListener('click', function(){
-  l2ScrollIdx = Math.max(0, l2ScrollIdx - 1);
-  var pills = pipeL2.querySelectorAll('.pipe-pill');
-  if(pills[l2ScrollIdx]) pills[l2ScrollIdx].scrollIntoView({behavior:'smooth', inline:'start', block:'nearest'});
-  updateL2Arrows();
-});
-l2Right.addEventListener('click', function(){
-  var pills = pipeL2.querySelectorAll('.pipe-pill');
-  l2ScrollIdx = Math.min(pills.length - 1, l2ScrollIdx + 1);
-  if(pills[l2ScrollIdx]) pills[l2ScrollIdx].scrollIntoView({behavior:'smooth', inline:'start', block:'nearest'});
-  updateL2Arrows();
-});
 
 /* ═══════════════════════════
    RENDER SESSIONS (per-row stepper)
@@ -833,7 +712,6 @@ function updateCTA(){
    ═══════════════════════════ */
 renderPipeL1();
 renderCards();
-renderPipeL2();
 renderSessions();
 
 if(!hadUrlState){

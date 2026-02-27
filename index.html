@@ -610,7 +610,7 @@ function renderCards(){
 
     function scrollToPipe(){
       var headerH = document.querySelector('.sticky-header').offsetHeight || 0;
-      var y = pipeL1.getBoundingClientRect().top + window.pageYOffset - headerH - 8;
+      var y = sessionsPanel.getBoundingClientRect().top + window.pageYOffset - headerH - 8;
       window.scrollTo({top:Math.max(0,y), behavior:'smooth'});
     }
 

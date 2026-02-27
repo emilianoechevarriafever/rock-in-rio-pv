@@ -90,10 +90,10 @@
 
     /* Ticket Cards */
     .cards-section { padding:8px 0; }
-    .cards-scroll { display:flex; gap:12px; overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; padding:0 16px 16px; scrollbar-width:none; min-height:380px; }
+    .cards-scroll { display:flex; gap:12px; overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; padding:0 16px 16px; scrollbar-width:none; align-items:stretch; }
     .cards-scroll.single-card { justify-content:center; overflow-x:visible; }
     .cards-scroll::-webkit-scrollbar { display:none; }
-    .ticket-card { flex-shrink:0; width:260px; height:360px; scroll-snap-align:start; border:2px solid var(--color-border); border-radius:12px; overflow:hidden; background:#fff; cursor:pointer; transition:border-color 0.2s, box-shadow 0.2s, transform 0.3s; display:flex; flex-direction:column; }
+    .ticket-card { flex-shrink:0; width:260px; scroll-snap-align:start; border:2px solid var(--color-border); border-radius:12px; overflow:hidden; background:#fff; cursor:pointer; transition:border-color 0.2s, box-shadow 0.2s, transform 0.3s; display:flex; flex-direction:column; }
     .ticket-card.active { border-color:var(--color-primary); box-shadow:0 0 0 2px rgba(0,121,202,0.25); }
     .ticket-card:hover { transform:translateY(-2px); box-shadow:0 4px 12px rgba(0,0,0,0.12); }
     .ticket-card .card-img { width:100%; aspect-ratio:272/153; object-fit:cover; display:block; }
@@ -553,6 +553,15 @@ var cardsSection = document.getElementById('cardsSection');
 /* ═══════════════════════════
    RENDER CARDS
    ═══════════════════════════ */
+var dayCardsHeight = 0;
+
+function measureDayCardsHeight(){
+  var cards = cardsScroll.querySelectorAll('.ticket-card');
+  var max = 0;
+  cards.forEach(function(c){ if(c.offsetHeight > max) max = c.offsetHeight; });
+  if(max > 0) dayCardsHeight = max;
+}
+
 function renderCards(){
   cardsScroll.innerHTML = '';
   cardsSection.style.display = '';
@@ -578,6 +587,9 @@ function renderCards(){
     var card = document.createElement('div');
     card.className = 'ticket-card' + (isActive ? ' active' : '');
     card.setAttribute('data-tier', t.id);
+    if(currentL1 === 'weekend' && dayCardsHeight > 0){
+      card.style.height = dayCardsHeight + 'px';
+    }
     var badgeHtml = '';
     if(t.badge) badgeHtml = '<div class="card-badge '+t.badge.cls+'">'+t.badge.text+'</div>';
 
@@ -600,6 +612,10 @@ function renderCards(){
     });
     cardsScroll.appendChild(card);
   });
+
+  if(currentL1 !== 'weekend'){
+    requestAnimationFrame(measureDayCardsHeight);
+  }
 }
 
 function scrollCardIntoView(tierId){

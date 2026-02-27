@@ -93,17 +93,17 @@
     .cards-scroll { display:flex; gap:12px; overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; padding:0 16px 16px; scrollbar-width:none; align-items:stretch; }
     .cards-scroll.single-card { justify-content:center; overflow-x:visible; }
     .cards-scroll::-webkit-scrollbar { display:none; }
-    .ticket-card { flex-shrink:0; width:260px; scroll-snap-align:start; border:2px solid var(--color-border); border-radius:12px; overflow:hidden; background:#fff; cursor:pointer; transition:border-color 0.2s, box-shadow 0.2s, transform 0.3s; display:flex; flex-direction:column; }
-    .ticket-card.active { border-color:var(--color-primary); background:var(--color-primary-weak); box-shadow:none; }
+    .ticket-card { flex-shrink:0; width:260px; scroll-snap-align:start; border:1px solid #ccd2d8; border-radius:8px; overflow:hidden; background:#fff; cursor:pointer; transition:border-color 0.2s, box-shadow 0.2s, transform 0.3s; display:flex; flex-direction:column; box-shadow:0 2px 4px 0 rgba(0,0,0,0.08); }
+    .ticket-card.active { border-color:var(--color-primary); background:var(--color-primary-weak); }
     .ticket-card:hover { transform:translateY(-2px); box-shadow:0 4px 12px rgba(0,0,0,0.12); }
     .ticket-card .card-img { width:100%; aspect-ratio:272/153; object-fit:cover; display:block; }
     .ticket-card .card-badge { position:absolute; bottom:0; left:0; right:0; text-align:center; font-size:13px; font-weight:400; padding:4px 12px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
     .ticket-card .card-badge--new { background:#73BFF6; color:var(--color-text-main); }
     .ticket-card .card-badge--best { background:var(--color-accent); color:#fff; }
     .ticket-card .card-img-wrap { position:relative; }
-    .ticket-card .card-body { padding:16px 12px 10px; display:flex; flex-direction:column; gap:10px; flex:1; }
-    .ticket-card .card-title { font-size:16px; font-weight:600; text-align:center; }
-    .ticket-card .card-features { list-style:disc; padding-left:16px; font-size:13px; color:var(--color-text-subtle); display:grid; gap:3px; }
+    .ticket-card .card-body { padding:12px 12px 16px; display:flex; flex-direction:column; gap:8px; flex:1; }
+    .ticket-card .card-title { font-size:14px; font-weight:600; line-height:18px; }
+    .ticket-card .card-features { list-style:disc; padding-left:16px; font-size:12px; line-height:16px; color:var(--color-text-main); display:grid; gap:4px; }
     .ticket-card .card-btns { display:flex; flex-direction:column; gap:8px; margin-top:auto; }
     .ticket-card .card-btn-price { display:block; width:100%; padding:8px 0; border:none; border-radius:64px; font-family:var(--font); font-size:13px; font-weight:600; text-align:center; background:var(--color-text-main); color:#fff; cursor:pointer; }
     .ticket-card .card-btn-secondary { background:#fff; color:var(--color-text-main); border:1px solid var(--color-border); }
